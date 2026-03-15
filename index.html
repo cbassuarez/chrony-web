@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="chrony is a synced notepad for writing, coding, and keeping one shared pad always ready." />
+    <meta name="theme-color" content="#efe6d2" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="chrony" />
+    <meta property="og:title" content="chrony | One shared pad, always ready" />
+    <meta property="og:description" content="A synced notepad by Stage Devices for fast writing, language-aware editing, and pro workflows." />
+    <meta property="og:url" content="https://chronyapp.com/" />
+    <meta property="og:image" content="https://chronyapp.com/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="chrony | One shared pad, always ready" />
+    <meta name="twitter:description" content="A synced notepad by Stage Devices for fast writing, language-aware editing, and pro workflows." />
+    <meta name="twitter:image" content="https://chronyapp.com/og-image.svg" />
+    <link rel="canonical" href="https://chronyapp.com/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+    <title>chrony | One shared pad, always ready</title>
+    <script>
+      (function restoreSpaPath(location) {
+        if (location.search[1] === '/') {
+          const decoded = location.search
+            .slice(1)
+            .split('&')
+            .map(function (segment) {
+              return segment.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, '', location.pathname.slice(0, -1) + decoded + location.hash);
+        }
+      })(window.location);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

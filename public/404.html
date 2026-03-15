@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>chrony</title>
+    <script>
+      const pathSegmentsToKeep = 0;
+      const loc = window.location;
+      const base = loc.protocol + '//' + loc.hostname + (loc.port ? ':' + loc.port : '');
+      const path = loc.pathname
+        .split('/')
+        .slice(1)
+        .slice(pathSegmentsToKeep)
+        .join('/');
+      const query = loc.search ? '&' + loc.search.slice(1).replace(/&/g, '~and~') : '';
+      const redirect = base + '/' + (path ? '?' + '/' + path + query + loc.hash : '');
+      window.location.replace(redirect);
+    </script>
+  </head>
+  <body></body>
+</html>

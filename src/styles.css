@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --page: 43 39% 90%;
+  --ink: 28 63% 9%;
+  --muted: 201 22% 36%;
+  --panel: 42 44% 93%;
+  --line: 40 30% 75%;
+  --accent: 171 73% 23%;
+  --glow: 205 46% 40%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+  color: hsl(var(--ink));
+  background:
+    radial-gradient(circle at 15% 0%, hsl(42 65% 95% / 0.8), transparent 40%),
+    radial-gradient(circle at 90% 5%, hsl(188 49% 90% / 0.5), transparent 38%),
+    hsl(var(--page));
+  text-rendering: geometricPrecision;
+}
+
+a {
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
