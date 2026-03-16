@@ -37,6 +37,14 @@ export function ArcticSyncCursor(): React.JSX.Element | null {
 
   const ringRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
+  const trailRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
+  const lastFrameRef = useRef<number | null>(null);
+  const targetRef = useRef({ x: 0, y: 0 });
+  const ringPositionRef = useRef({ x: 0, y: 0 });
+  const trailPositionRef = useRef({ x: 0, y: 0 });
+  const isVisibleRef = useRef(false);
+  const modeRef = useRef<CursorMode>('default');
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -85,6 +93,14 @@ export function ArcticSyncCursor(): React.JSX.Element | null {
       return;
     }
 
+    const syncMode = (nextMode: CursorMode): void => {
+      if (modeRef.current === nextMode) {
+        return;
+      }
+      modeRef.current = nextMode;
+      setMode(nextMode);
+    };
+
     const updatePosition = (x: number, y: number): void => {
       const position = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
       if (ringRef.current) {
@@ -93,20 +109,58 @@ export function ArcticSyncCursor(): React.JSX.Element | null {
       if (dotRef.current) {
         dotRef.current.style.transform = position;
       }
+      if (trailRef.current) {
+        trailRef.current.style.transform = position;
+      }
     };
 
-    const updateMode = (target: EventTarget | null): void => {
-      setMode(resolveCursorMode(target));
+    const tick = (timestamp: number): void => {
+      const last = lastFrameRef.current ?? timestamp;
+      const frameScale = Math.min(3, Math.max(0.7, (timestamp - last) / 16.67));
+      const ringFollow = 1 - Math.pow(1 - 0.7, frameScale);
+      const trailFollow = 1 - Math.pow(1 - 0.42, frameScale);
+
+      lastFrameRef.current = timestamp;
+
+      const ring = ringPositionRef.current;
+      const trail = trailPositionRef.current;
+      const target = targetRef.current;
+
+      ring.x += (target.x - ring.x) * ringFollow;
+      ring.y += (target.y - ring.y) * ringFollow;
+
+      trail.x += (ring.x - trail.x) * trailFollow;
+      trail.y += (ring.y - trail.y) * trailFollow;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0) translate(-50%, -50%)`;
+      }
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0) translate(-50%, -50%)`;
+      }
+      if (trailRef.current) {
+        trailRef.current.style.transform = `translate3d(${trail.x}px, ${trail.y}px, 0) translate(-50%, -50%)`;
+      }
+
+      rafRef.current = window.requestAnimationFrame(tick);
     };
 
     const onPointerMove = (event: PointerEvent): void => {
-      updatePosition(event.clientX, event.clientY);
-      updateMode(event.target);
-      setVisible(true);
+      targetRef.current.x = event.clientX;
+      targetRef.current.y = event.clientY;
+
+      if (!isVisibleRef.current) {
+        ringPositionRef.current = { ...targetRef.current };
+        trailPositionRef.current = { ...targetRef.current };
+        updatePosition(event.clientX, event.clientY);
+        isVisibleRef.current = true;
+        setVisible(true);
+      }
     };
 
-    const onPointerDown = (): void => {
+    const onPointerDown = (event: PointerEvent): void => {
       setPressed(true);
+      syncMode(resolveCursorMode(event.target));
     };
 
     const onPointerUp = (): void => {
@@ -114,18 +168,24 @@ export function ArcticSyncCursor(): React.JSX.Element | null {
     };
 
     const onPointerOver = (event: PointerEvent): void => {
-      updateMode(event.target);
+      syncMode(resolveCursorMode(event.target));
     };
 
     const onPointerLeave = (): void => {
+      isVisibleRef.current = false;
       setVisible(false);
       setPressed(false);
+      syncMode('default');
     };
 
     const onWindowBlur = (): void => {
+      isVisibleRef.current = false;
       setVisible(false);
       setPressed(false);
+      syncMode('default');
     };
+
+    rafRef.current = window.requestAnimationFrame(tick);
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerrawupdate', onPointerMove as EventListener, { passive: true });
@@ -136,6 +196,11 @@ export function ArcticSyncCursor(): React.JSX.Element | null {
     window.addEventListener('blur', onWindowBlur);
 
     return () => {
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+      }
+      rafRef.current = null;
+      lastFrameRef.current = null;
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerrawupdate', onPointerMove as EventListener);
       window.removeEventListener('pointerdown', onPointerDown);
@@ -152,11 +217,21 @@ export function ArcticSyncCursor(): React.JSX.Element | null {
 
   const hidden = !visible || mode === 'text';
   const hideDot = !visible || mode !== 'default';
+  const hideTrail = !visible || mode !== 'default';
   const showArrow = mode === 'interactive' || mode === 'status';
   const isStatus = mode === 'status';
 
   return (
     <>
+      <div
+        ref={trailRef}
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none fixed left-0 top-0 z-[69] rounded-full bg-rowBorder/28 blur-[0.7px] transition-opacity duration-90',
+          hideTrail ? 'h-0 w-0 opacity-0' : 'h-3.5 w-3.5 opacity-100',
+          pressed ? 'scale-75' : 'scale-100',
+        )}
+      />
       <div
         ref={ringRef}
         aria-hidden="true"
