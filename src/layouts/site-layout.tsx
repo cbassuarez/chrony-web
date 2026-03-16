@@ -31,6 +31,27 @@ export function SiteLayout(): React.JSX.Element {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (location.hash) {
+      const hashTarget = location.hash.slice(1);
+      const decodedHashTarget = (() => {
+        try {
+          return decodeURIComponent(hashTarget);
+        } catch {
+          return hashTarget;
+        }
+      })();
+      const anchorTarget = document.getElementById(decodedHashTarget);
+
+      if (anchorTarget) {
+        anchorTarget.scrollIntoView();
+        return;
+      }
+    }
+
+    window.scrollTo(0, 0);
+  }, [location.pathname, location.search, location.hash]);
+
+  useEffect(() => {
     const resolveTone = (): void => {
       const header = headerRef.current;
       if (!header) {
