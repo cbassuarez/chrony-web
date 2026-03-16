@@ -50,9 +50,13 @@ describe('Chrony route coverage', () => {
     renderPath('/pricing');
 
     expect(await screen.findByRole('heading', { name: /pricing for deeper writing and recovery workflows/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /what pro unlocks in practice/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^monthly$/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^annual$/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /open app store listing/i })).toHaveAttribute('href', appStoreUrl);
+    expect(screen.getByText(/7 export formats/i)).toBeInTheDocument();
+    expect(screen.getByText(/8 pro languages/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /start 1 week free in app store/i })).toHaveAttribute('href', appStoreUrl);
     expect(screen.getByText('$1.99')).toBeInTheDocument();
     expect(screen.getByText('$17.99')).toBeInTheDocument();
     expect(screen.getByText('1 week free')).toBeInTheDocument();

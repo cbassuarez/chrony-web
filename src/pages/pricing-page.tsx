@@ -25,12 +25,51 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 2,
 });
 
-const proUnlocks = [
+const heroProHighlights = [
   'Restore exact timeline points when you need to roll back safely.',
   'Run sanitize and validate passes before sharing technical snippets.',
   'Pin known-good snapshots for repeat workflows and handoffs.',
   'Use deeper language workflow controls beyond baseline AUTO mode.',
   'Escalate faster with diagnostics context designed for support triage.',
+] as const;
+
+interface ProUnlockOutcome {
+  title: string;
+  free: string;
+  pro: string;
+  proofChip: string;
+  detail: string;
+}
+
+const proUnlockOutcomes: readonly ProUnlockOutcome[] = [
+  {
+    title: 'Recover safely',
+    free: 'Current state only.',
+    pro: 'Restore from Snapshot Timeline and save named Pin Snapshot checkpoints.',
+    proofChip: 'Timeline + Pin Snapshot',
+    detail: 'Roll back with confidence while keeping a complete history.',
+  },
+  {
+    title: 'Ship cleaner snippets',
+    free: 'Manual cleanup before sharing.',
+    pro: 'Run Sanitize + Validate with Unicode and parser diagnostics plus fix preview.',
+    proofChip: 'Unicode + parser diagnostics',
+    detail: 'Catch risky characters and structural issues before handoff.',
+  },
+  {
+    title: 'Handoff faster',
+    free: 'Minimal export coverage.',
+    pro: 'Use Advanced Export for source, preview, metadata payloads, and bundle handoff.',
+    proofChip: '7 export formats',
+    detail: 'Plain Text, Markdown, HTML Source, HTML Preview, Web Bundle (.zip), JSON, and chronybundle.',
+  },
+  {
+    title: 'Work beyond AUTO',
+    free: 'AUTO with core language workflows.',
+    pro: 'Choose advanced language workflows for JavaScript, TypeScript, Python, HTML, CSS, JSON, C, and C++.',
+    proofChip: '8 Pro languages',
+    detail: 'Move from fallback highlighting to explicit language control when precision matters.',
+  },
 ] as const;
 
 const freeVsProRows = [
@@ -119,7 +158,7 @@ export function PricingPage(): React.JSX.Element {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2 text-[13px] leading-7 text-white/90">
-                {proUnlocks.slice(0, 3).map((value) => (
+                {heroProHighlights.slice(0, 3).map((value) => (
                   <p key={value} className="flex items-start gap-2">
                     <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-white/76" />
                     <span>{renderWordmarkCopy(value)}</span>
@@ -205,15 +244,44 @@ export function PricingPage(): React.JSX.Element {
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <Card className="bg-page/88 backdrop-blur-md">
           <CardHeader className="space-y-2">
-            <CardTitle className="text-2xl">What Pro unlocks</CardTitle>
+            <CardTitle className="text-2xl">What Pro unlocks in practice</CardTitle>
+            <CardDescription className="text-[13px] leading-7">
+              Keep recovery paths close, ship cleaner snippets, and hand off work with fewer share-time mistakes.
+            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2 text-[13px] leading-7 text-muted">
-            {proUnlocks.map((feature) => (
-              <p key={feature} className="flex items-start gap-2">
-                <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-rowBorder" />
-                <span>{renderWordmarkCopy(feature)}</span>
-              </p>
+          <CardContent className="space-y-3 text-[13px] leading-7 text-muted">
+            {proUnlockOutcomes.map((outcome) => (
+              <article key={outcome.title} className="rounded-compact border border-line bg-row/55 p-3">
+                <div className="flex items-start justify-between gap-3">
+                  <p className="flex items-start gap-2 font-semibold text-ink">
+                    <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-rowBorder" />
+                    <span>{outcome.title}</span>
+                  </p>
+                  <Badge variant="accent" className="shrink-0">
+                    {outcome.proofChip}
+                  </Badge>
+                </div>
+                <p className="mt-2 text-[12px] leading-6">
+                  <span className="font-semibold text-ink">Free:</span> {outcome.free} <span className="text-muted">|</span>{' '}
+                  <span className="font-semibold text-ink">Pro:</span> {outcome.pro}
+                </p>
+                <p className="text-[12px] leading-6">{outcome.detail}</p>
+              </article>
             ))}
+            <div className="rounded-compact border border-rowBorder bg-row p-3">
+              <a
+                href={appStoreUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonVariants({ variant: 'default' }), 'inline-flex gap-2')}
+              >
+                Start {annualPlan.trialLabel ?? 'trial'} in App Store <ExternalLink className="size-4" />
+              </a>
+              <p className="mt-2 text-[12px] leading-6">
+                Annual includes {annualPlan.trialLabel ?? 'trial availability by storefront'} and saves {derivedPricing.annualSavingsPercent}% vs
+                monthly. {proPricingContent.trustLine}
+              </p>
+            </div>
           </CardContent>
         </Card>
 
