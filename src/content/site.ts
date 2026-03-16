@@ -1,4 +1,4 @@
-export type RouteId = 'home' | 'download' | 'privacy' | 'terms' | 'support' | 'about';
+export type RouteId = 'home' | 'download' | 'privacy' | 'terms' | 'support' | 'about' | 'status';
 
 export interface RouteMeta {
   id: RouteId;
@@ -88,6 +88,14 @@ export const routeMetaList: RouteMeta[] = [
     description:
       'Learn about chrony, its synced writing workflow, and the Stage Devices team building it.',
     canonicalPath: '/about',
+  },
+  {
+    id: 'status',
+    label: 'Status',
+    path: '/status',
+    title: 'chrony Status | Stage Devices',
+    description: 'Live chrony status from Better Stack.',
+    canonicalPath: '/status',
   },
 ];
 

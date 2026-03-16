@@ -20,90 +20,76 @@ export function SiteLayout(): React.JSX.Element {
 
   return (
     <div className="min-h-screen bg-page text-ink">
-      <header className="sticky top-0 z-40 border-b border-line bg-page/94 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center justify-between md:block">
-            <NavLink to="/" className="text-[30px] font-semibold tracking-tight text-ink">
-              chrony
-            </NavLink>
-            <button
-              type="button"
-              className="rounded-compact border border-line bg-row px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink md:hidden"
-              onClick={() => setIsMobileNavOpen((value) => !value)}
-              aria-expanded={isMobileNavOpen}
-              aria-controls="mobile-primary-nav"
-              aria-label={isMobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            >
-              Menu
-            </button>
-          </div>
-          <nav aria-label="Primary" className="hidden w-full gap-2 md:flex md:w-auto md:pb-0">
-            {routeMetaList.map((route) => (
-              <NavLink
-                key={route.id}
-                to={route.path}
-                end={route.path === '/'}
-                className={({ isActive }) =>
-                  cn(
-                    'rounded-compact border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors whitespace-nowrap',
-                    isActive ? 'border-rowBorder bg-rowActive text-ink' : 'border-line bg-row text-muted hover:text-ink',
-                  )
-                }
-              >
-                {route.label}
+      <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-standard border border-line bg-page/92 shadow-[0_16px_40px_-28px_hsl(var(--ink)/0.55)] backdrop-blur-md">
+          <div className="flex flex-col gap-3 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center justify-between md:block">
+              <NavLink to="/" className="text-[30px] font-semibold tracking-tight text-ink">
+                chrony
               </NavLink>
-            ))}
-            <a
-              href="https://status.chronyapp.com"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-compact border border-line bg-row px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition-colors whitespace-nowrap hover:text-ink"
-            >
-              Status
-            </a>
-          </nav>
-        </div>
-
-        <AnimatePresence>
-          {isMobileNavOpen ? (
-            <motion.div
-              id="mobile-primary-nav"
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.2, ease: [0.2, 0.7, 0.2, 1] }}
-              className="border-t border-line bg-page px-6 pb-4 pt-2 md:hidden"
-            >
-              <nav aria-label="Mobile primary" className="flex flex-col gap-2">
-                {routeMetaList.map((route) => (
-                  <NavLink
-                    key={route.id}
-                    to={route.path}
-                    end={route.path === '/'}
-                    className={({ isActive }) =>
-                      cn(
-                        'rounded-compact border px-3 py-2 text-left text-xs font-semibold uppercase tracking-[0.12em] transition-colors',
-                        isActive
-                          ? 'border-rowBorder bg-rowActive text-ink'
-                          : 'border-line bg-row text-muted hover:text-ink',
-                      )
-                    }
-                  >
-                    {route.label}
-                  </NavLink>
-                ))}
-                <a
-                  href="https://status.chronyapp.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-compact border border-line bg-row px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink"
+              <button
+                type="button"
+                className="rounded-compact border border-line bg-row px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink md:hidden"
+                onClick={() => setIsMobileNavOpen((value) => !value)}
+                aria-expanded={isMobileNavOpen}
+                aria-controls="mobile-primary-nav"
+                aria-label={isMobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              >
+                Menu
+              </button>
+            </div>
+            <nav aria-label="Primary" className="hidden w-full gap-2 md:flex md:w-auto md:pb-0">
+              {routeMetaList.map((route) => (
+                <NavLink
+                  key={route.id}
+                  to={route.path}
+                  end={route.path === '/'}
+                  className={({ isActive }) =>
+                    cn(
+                      'rounded-compact border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors whitespace-nowrap',
+                      isActive ? 'border-rowBorder bg-rowActive text-ink' : 'border-line bg-row text-muted hover:text-ink',
+                    )
+                  }
                 >
-                  Status
-                </a>
-              </nav>
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+                  {route.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+
+          <AnimatePresence>
+            {isMobileNavOpen ? (
+              <motion.div
+                id="mobile-primary-nav"
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.2, ease: [0.2, 0.7, 0.2, 1] }}
+                className="border-t border-line bg-page px-4 pb-4 pt-2 sm:px-5 md:hidden"
+              >
+                <nav aria-label="Mobile primary" className="flex flex-col gap-2">
+                  {routeMetaList.map((route) => (
+                    <NavLink
+                      key={route.id}
+                      to={route.path}
+                      end={route.path === '/'}
+                      className={({ isActive }) =>
+                        cn(
+                          'rounded-compact border px-3 py-2 text-left text-xs font-semibold uppercase tracking-[0.12em] transition-colors',
+                          isActive
+                            ? 'border-rowBorder bg-rowActive text-ink'
+                            : 'border-line bg-row text-muted hover:text-ink',
+                        )
+                      }
+                    >
+                      {route.label}
+                    </NavLink>
+                  ))}
+                </nav>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+        </div>
       </header>
 
       <AnimatePresence mode="wait">
@@ -113,7 +99,7 @@ export function SiteLayout(): React.JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mx-auto max-w-6xl px-6 pb-16 pt-10"
+          className="mx-auto max-w-6xl px-6 pb-16 pt-0"
         >
           <Outlet />
         </motion.main>
