@@ -62,7 +62,7 @@ export function StatusPage(): React.JSX.Element {
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[86px] border-b border-slate-200/85 bg-white/96 shadow-[0_10px_26px_-24px_rgba(15,23,42,0.38)] md:h-[94px]"
+            className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[86px] border-b border-slate-200 bg-white shadow-[0_10px_26px_-24px_rgba(15,23,42,0.38)] md:h-[94px]"
           />
           <div
             aria-hidden
