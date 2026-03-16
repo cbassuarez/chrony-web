@@ -42,17 +42,17 @@ export function AboutPage(): React.JSX.Element {
 
         <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
-            <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-200/92">Product story</p>
-              <h1 className="text-4xl font-semibold leading-[1.06] text-slate-50 md:text-6xl">
-                About <Wordmark className="text-slate-50" />
+            <div className="space-y-5 text-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/80">Product story</p>
+              <h1 className="text-4xl font-semibold leading-[1.06] text-white md:text-6xl">
+                About <Wordmark className="text-white" />
               </h1>
-              <p className="max-w-3xl text-[15px] leading-8 text-slate-200/92 md:text-[17px]">
+              <p className="max-w-3xl text-[15px] leading-8 text-white/90 md:text-[17px]">
                 {renderWordmarkCopy(
                   'chrony is built around a simple premise: writing should start immediately, not after project setup, template choice, or app navigation. Open the app and your shared pad is already there.',
                 )}
               </p>
-              <p className="max-w-3xl text-[15px] leading-8 text-slate-200/92 md:text-[17px]">
+              <p className="max-w-3xl text-[15px] leading-8 text-white/90 md:text-[17px]">
                 {renderWordmarkCopy(
                   'The same document context follows you across iPhone, iPad, and Mac, with synchronization in the background and pro workflows available when you need deeper control.',
                 )}

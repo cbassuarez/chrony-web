@@ -24,11 +24,11 @@ export function ProductSnapshotGrid({ ids, className }: ProductSnapshotGridProps
       {ids.map((id) => {
         const snapshot = productSnapshots[id];
         return (
-          <figure key={snapshot.id} className="rounded-standard border border-line bg-row p-3">
-            <div className={cn('overflow-hidden rounded-compact border border-line bg-page', snapshotAspect(snapshot))}>
+          <figure key={snapshot.id} className="space-y-2">
+            <div className={cn('overflow-hidden rounded-compact bg-transparent', snapshotAspect(snapshot))}>
               <img src={snapshot.src} alt={snapshot.alt} loading="lazy" className="h-full w-full object-contain object-center" />
             </div>
-            <figcaption className="mt-2 text-[11px] uppercase tracking-[0.12em] text-muted">{snapshot.label}</figcaption>
+            <figcaption className="text-[11px] uppercase tracking-[0.12em] text-muted">{snapshot.label}</figcaption>
           </figure>
         );
       })}

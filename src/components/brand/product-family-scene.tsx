@@ -25,14 +25,9 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
 
   return (
     <div className={cn('relative mx-auto h-[300px] w-full max-w-[860px] md:h-[380px] lg:h-[420px] [perspective:2000px]', className)}>
-      <div
-        className={cn(
-          'absolute inset-0 rounded-[24px] blur-2xl',
-          theme === 'obsidian'
-            ? 'bg-gradient-to-br from-slate-300/65 via-slate-200/35 to-slate-400/55'
-            : 'bg-gradient-to-br from-page/90 via-page/60 to-page/90',
-        )}
-      />
+      {theme === 'obsidian' ? null : (
+        <div className="absolute inset-0 rounded-[24px] bg-gradient-to-br from-page/90 via-page/60 to-page/90 blur-2xl" />
+      )}
 
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -45,7 +40,10 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         <img
           src={snapshots.mac.src}
           alt={snapshots.mac.alt}
-          className="w-full rounded-standard border border-line/70 shadow-[0_44px_84px_-52px_hsl(var(--ink)/0.72)]"
+          className={cn(
+            'w-full rounded-standard shadow-[0_44px_84px_-52px_hsl(var(--ink)/0.72)]',
+            theme === 'obsidian' ? 'border-0' : 'border border-line/70',
+          )}
           loading="eager"
         />
       </motion.div>
@@ -61,7 +59,10 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         <img
           src={snapshots.ipad.src}
           alt={snapshots.ipad.alt}
-          className="w-full rounded-standard border border-line/70 shadow-[0_42px_80px_-56px_hsl(var(--ink)/0.72)]"
+          className={cn(
+            'w-full rounded-standard shadow-[0_42px_80px_-56px_hsl(var(--ink)/0.72)]',
+            theme === 'obsidian' ? 'border-0' : 'border border-line/70',
+          )}
           loading="eager"
         />
       </motion.div>
@@ -77,7 +78,10 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         <img
           src={snapshots.iphone.src}
           alt={snapshots.iphone.alt}
-          className="w-full rounded-standard border border-line/70 shadow-[0_38px_72px_-48px_hsl(var(--ink)/0.82)]"
+          className={cn(
+            'w-full rounded-standard shadow-[0_38px_72px_-48px_hsl(var(--ink)/0.82)]',
+            theme === 'obsidian' ? 'border-0' : 'border border-line/70',
+          )}
           loading="eager"
         />
       </motion.div>
@@ -91,8 +95,8 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
       >
         <div
           className={cn(
-            'rounded-[24%] border p-2 shadow-[0_30px_56px_-36px_hsl(var(--ink)/0.88)] backdrop-blur-sm',
-            theme === 'obsidian' ? 'border-line/70 bg-slate-900/78' : 'border-line/80 bg-page/90',
+            'rounded-[24%] p-2 shadow-[0_30px_56px_-36px_hsl(var(--ink)/0.88)]',
+            theme === 'obsidian' ? 'border-0 bg-transparent backdrop-blur-0' : 'border border-line/80 bg-page/90 backdrop-blur-sm',
           )}
         >
           <img src={appIconAsset.src} alt={appIconAsset.alt} className="w-full rounded-[20%]" loading="eager" />
