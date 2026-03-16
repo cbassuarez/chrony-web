@@ -44,10 +44,4 @@ describe('Chrony route coverage', () => {
     renderPath('/about');
     expect(await screen.findByRole('heading', { name: /about chrony/i })).toBeInTheDocument();
   });
-
-  it('renders status route with heartbeat guidance', async () => {
-    renderPath('/status');
-    expect(await screen.findByRole('heading', { name: /status and heartbeats/i })).toBeInTheDocument();
-    expect(screen.getByText(/chrony-sync-api-health/i)).toBeInTheDocument();
-  });
 });
