@@ -244,7 +244,7 @@ export function PricingPage(): React.JSX.Element {
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <Card className="bg-page/88 backdrop-blur-md">
           <CardHeader className="space-y-2">
-            <CardTitle className="text-2xl">What Pro unlocks in practice</CardTitle>
+            <CardTitle className="text-2xl">What Pro unlocks</CardTitle>
             <CardDescription className="text-[13px] leading-7">
               Keep recovery paths close, ship cleaner snippets, and hand off work with fewer share-time mistakes.
             </CardDescription>
@@ -252,12 +252,12 @@ export function PricingPage(): React.JSX.Element {
           <CardContent className="space-y-3 text-[13px] leading-7 text-muted">
             {proUnlockOutcomes.map((outcome) => (
               <article key={outcome.title} className="rounded-compact border border-line bg-row/55 p-3">
-                <div className="flex items-start justify-between gap-3">
-                  <p className="flex items-start gap-2 font-semibold text-ink">
+                <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
+                  <p className="flex min-w-0 items-start gap-2 font-semibold text-ink">
                     <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-rowBorder" />
-                    <span>{outcome.title}</span>
+                    <span className="min-w-0 break-words">{outcome.title}</span>
                   </p>
-                  <Badge variant="accent" className="shrink-0">
+                  <Badge variant="accent" className="max-w-full self-start whitespace-normal break-words text-[10px] leading-4 sm:shrink-0">
                     {outcome.proofChip}
                   </Badge>
                 </div>
