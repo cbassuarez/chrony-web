@@ -252,8 +252,8 @@ export const featureCards: FeatureCardContent[] = [
     body: 'Stay in AUTO for daily writing, then switch language mode for code-focused clarity.',
   },
   {
-    title: 'Arctic chrome controls',
-    body: 'Compact radii, restrained surfaces, and low-friction controls modeled after app chrome.',
+    title: 'Six built-in themes',
+    body: 'Switch between Arctic, Goldenrod, Sea Foam, Aurora Mist, Graphite, and Obsidian to match your contrast and focus preference.',
   },
   {
     title: 'chrony pro workflows',
