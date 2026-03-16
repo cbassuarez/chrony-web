@@ -3,6 +3,7 @@ import { ArrowUpRight, CircleCheckBig, ExternalLink, Laptop, ShieldCheck, Smartp
 import { Link } from 'react-router-dom';
 import { ChronyShader } from '@/components/brand/chrony-shader';
 import { ProductSnapshotGrid } from '@/components/brand/product-snapshot-grid';
+import { Wordmark, renderWordmarkCopy } from '@/components/brand/wordmark';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { appIconAsset, productSnapshotCards } from '@/content/media';
@@ -70,7 +71,9 @@ export function DownloadPage(): React.JSX.Element {
         <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
           <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
             <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Install chrony</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                Install <Wordmark />
+              </p>
               <h1 className="text-4xl font-semibold leading-[1.05] text-ink md:text-6xl">
                 Download on the App Store and Mac App Store.
               </h1>
@@ -133,9 +136,11 @@ export function DownloadPage(): React.JSX.Element {
                   <img
                     src={appIconAsset.src}
                     alt={appIconAsset.alt}
-                    className="size-11 rounded-standard border border-line bg-page object-cover object-center"
+                  className="size-11 rounded-standard border border-line bg-page object-cover object-center"
                   />
-                  chrony synced notepad
+                  <span className="inline-flex items-baseline gap-1">
+                    <Wordmark /> synced notepad
+                  </span>
                 </CardTitle>
                 <CardDescription className="text-[13px] leading-7">
                   Writing-first notepad with one continuously available document and synced state across Apple devices.
@@ -221,7 +226,7 @@ export function DownloadPage(): React.JSX.Element {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-[13px] leading-7 text-muted">
-            <p>Stay in flow at desktop scale with chrony’s compact chrome and synced context.</p>
+            <p>{renderWordmarkCopy('Stay in flow at desktop scale with chrony’s compact chrome and synced context.')}</p>
             <a
               href={macAppStoreUrl}
               target="_blank"
@@ -274,8 +279,9 @@ export function DownloadPage(): React.JSX.Element {
         </CardHeader>
         <CardContent className="grid gap-3 text-[13px] leading-7 text-muted md:grid-cols-2">
           <p>
-            chrony distribution is handled through Apple’s storefronts only. Install updates directly through the App
-            Store and Mac App Store channels.
+            {renderWordmarkCopy(
+              'chrony distribution is handled through Apple’s storefronts only. Install updates directly through the App Store and Mac App Store channels.',
+            )}
           </p>
           <p>
             Need help after install? Visit the live status page for incidents or contact support for account and sync

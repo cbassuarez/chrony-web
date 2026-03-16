@@ -1,6 +1,7 @@
 import type React from 'react';
 import { Activity, ExternalLink, Mail, ShieldCheck } from 'lucide-react';
 import { ChronyShader } from '@/components/brand/chrony-shader';
+import { renderWordmarkCopy } from '@/components/brand/wordmark';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { routeMetaById, statusPageUrl, supportEmail } from '@/content/site';
@@ -19,8 +20,9 @@ export function StatusPage(): React.JSX.Element {
           <p className="text-xs uppercase tracking-[0.16em] text-muted">Service health</p>
           <h1 className="text-4xl font-semibold text-ink md:text-5xl">Production status and incident timeline</h1>
           <p className="max-w-4xl text-[15px] leading-8 text-muted">
-            This page mirrors the live Better Stack status feed for chrony. For active incidents, updates are posted
-            on the embedded timeline as mitigation and recovery progress changes.
+            {renderWordmarkCopy(
+              'This page mirrors the live Better Stack status feed for chrony. For active incidents, updates are posted on the embedded timeline as mitigation and recovery progress changes.',
+            )}
           </p>
           <div className="flex flex-wrap gap-3">
             <a

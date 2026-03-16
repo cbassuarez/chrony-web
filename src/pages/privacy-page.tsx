@@ -1,4 +1,5 @@
 import type React from 'react';
+import { renderWordmarkCopy } from '@/components/brand/wordmark';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { privacySections, routeMetaById } from '@/content/site';
 import { usePageMeta } from '@/lib/seo';
@@ -12,8 +13,9 @@ export function PrivacyPage(): React.JSX.Element {
       <section className="space-y-3">
         <h1 className="font-sans text-4xl text-ink md:text-5xl">Privacy Policy</h1>
         <p className="max-w-3xl text-[15px] leading-8 text-muted">
-          This policy explains how Stage Devices handles data for chrony. It is an initial operational draft based on
-          current product behavior.
+          {renderWordmarkCopy(
+            'This policy explains how Stage Devices handles data for chrony. It is an initial operational draft based on current product behavior.',
+          )}
         </p>
       </section>
 
@@ -25,12 +27,12 @@ export function PrivacyPage(): React.JSX.Element {
             </CardHeader>
             <CardContent className="space-y-4 text-[13px] leading-7 text-muted">
               {section.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>{renderWordmarkCopy(paragraph)}</p>
               ))}
               {section.bullets ? (
                 <ul className="list-disc space-y-2 pl-6">
                   {section.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
+                    <li key={bullet}>{renderWordmarkCopy(bullet)}</li>
                   ))}
                 </ul>
               ) : null}

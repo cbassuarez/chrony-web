@@ -2,6 +2,7 @@ import type React from 'react';
 import { Activity, Mail, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ChronyShader } from '@/components/brand/chrony-shader';
+import { renderWordmarkCopy } from '@/components/brand/wordmark';
 import { Accordion } from '@/components/ui/accordion';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -85,9 +86,10 @@ export function SupportPage(): React.JSX.Element {
             <Wrench className="size-5" /> Diagnostics checklist
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-[13px] leading-7 text-muted">
-          Include app version, device model, OS version, locale, sign-in state, subscription state, and the exact time
-          of failure. chrony can copy support diagnostics from the in-app support area.
+      <CardContent className="text-[13px] leading-7 text-muted">
+          {renderWordmarkCopy(
+            'Include app version, device model, OS version, locale, sign-in state, subscription state, and the exact time of failure. chrony can copy support diagnostics from the in-app support area.',
+          )}
         </CardContent>
       </Card>
 
