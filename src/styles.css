@@ -39,6 +39,44 @@ a {
   color: inherit;
 }
 
+@keyframes chrony-cursor-status-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 12px 24px -16px hsl(var(--ink) / 0.45),
+      0 0 0 0 hsl(var(--row-active-border) / 0.2);
+  }
+  60% {
+    box-shadow:
+      0 12px 24px -16px hsl(var(--ink) / 0.45),
+      0 0 0 9px hsl(var(--row-active-border) / 0);
+  }
+}
+
+.chrony-cursor-status {
+  animation: chrony-cursor-status-pulse 1.8s ease-in-out infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.chrony-cursor-enabled,
+  html.chrony-cursor-enabled * {
+    cursor: none !important;
+  }
+
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'],
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] * {
+    cursor: auto !important;
+  }
+
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] input,
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] textarea,
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] [contenteditable='true'],
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] pre,
+  html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] code {
+    cursor: text !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

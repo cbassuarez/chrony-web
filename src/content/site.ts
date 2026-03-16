@@ -28,10 +28,13 @@ export interface LegalSection {
 
 export const supportEmail = 'developer@stagedevices.com';
 export const appStoreUrl = 'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213';
+export const macAppStoreUrl = `${appStoreUrl}?platform=mac`;
 export const appStoreBadgeHref =
   'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213?itscg=30200&itsct=apps_box_badge&mttnsubad=6756780213';
 export const appStoreBadgeImageUrl =
   'https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1766361600';
+export const macAppStoreBadgeImageUrl =
+  'https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us?releaseDate=1766361600';
 export const statusPageUrl = 'https://status.chronyapp.com';
 
 export const routeMetaList: RouteMeta[] = [

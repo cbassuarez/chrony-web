@@ -39,16 +39,19 @@ export function StatusPage(): React.JSX.Element {
 
         <section
           aria-label="Live status timeline"
-          className="overflow-hidden rounded-standard border border-line bg-page/95 shadow-card backdrop-blur-md"
+          data-cursor="status"
+          className="overflow-hidden rounded-standard border border-line bg-transparent shadow-card"
         >
           <iframe
             src={statusPageUrl}
             title="chrony service status"
-            className="h-[1200px] w-full md:h-[1320px]"
+            className="h-[1200px] w-full bg-transparent md:h-[1320px]"
+            style={{ backgroundColor: 'transparent' }}
             loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
             sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
             scrolling="no"
+            allowTransparency
           />
         </section>
 

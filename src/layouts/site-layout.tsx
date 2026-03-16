@@ -2,6 +2,7 @@ import type React from 'react';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { ArcticSyncCursor } from '@/components/brand/arctic-sync-cursor';
 import { routeMetaList, supportEmail } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { enforceApexCanonicalHost } from '@/lib/seo';
@@ -22,6 +23,8 @@ export function SiteLayout(): React.JSX.Element {
 
   return (
     <div className="min-h-screen bg-page text-ink">
+      <ArcticSyncCursor />
+
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
         <div className="mx-auto max-w-6xl overflow-hidden rounded-standard border border-line bg-page/92 shadow-[0_16px_40px_-28px_hsl(var(--ink)/0.55)] backdrop-blur-md">
           <div className="flex flex-col gap-3 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
