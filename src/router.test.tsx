@@ -47,7 +47,7 @@ describe('Chrony route coverage', () => {
 
   it('renders status route with embedded status iframe', async () => {
     renderPath('/status');
-    expect(await screen.findByRole('heading', { name: /^status$/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /production status and incident timeline/i })).toBeInTheDocument();
     expect(screen.getByTitle(/chrony service status/i)).toBeInTheDocument();
   });
 });

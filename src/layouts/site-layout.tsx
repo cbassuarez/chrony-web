@@ -9,6 +9,7 @@ import { enforceApexCanonicalHost } from '@/lib/seo';
 export function SiteLayout(): React.JSX.Element {
   const location = useLocation();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const isHomeRoute = location.pathname === '/';
 
   useEffect(() => {
     enforceApexCanonicalHost();
@@ -20,7 +21,7 @@ export function SiteLayout(): React.JSX.Element {
 
   return (
     <div className="min-h-screen bg-page text-ink">
-      <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
+      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
         <div className="mx-auto max-w-6xl overflow-hidden rounded-standard border border-line bg-page/92 shadow-[0_16px_40px_-28px_hsl(var(--ink)/0.55)] backdrop-blur-md">
           <div className="flex flex-col gap-3 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center justify-between md:block">
@@ -99,7 +100,7 @@ export function SiteLayout(): React.JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
-          className="mx-auto max-w-6xl px-6 pb-16 pt-0"
+          className={cn('mx-auto max-w-6xl px-6 pb-16', isHomeRoute ? 'pt-0' : 'pt-28 md:pt-32')}
         >
           <Outlet />
         </motion.main>

@@ -67,8 +67,8 @@ export function HomePage(): React.JSX.Element {
 
       <section className="space-y-5">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.16em] text-muted">Core capabilities</p>
-          <h2 className="text-3xl font-semibold text-ink md:text-4xl">Built from the same principles as the app</h2>
+          <p className="text-xs uppercase tracking-[0.16em] text-muted">What you can do now</p>
+          <h2 className="text-3xl font-semibold text-ink md:text-4xl">Capture once. Keep moving everywhere.</h2>
         </div>
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {featureCards.map((feature, index) => (
