@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { ArcticSyncCursor } from '@/components/brand/arctic-sync-cursor';
+import { Wordmark } from '@/components/brand/wordmark';
 import { routeMetaList, supportEmail } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { enforceApexCanonicalHost } from '@/lib/seo';
@@ -14,6 +15,7 @@ export function SiteLayout(): React.JSX.Element {
   const isStatusRoute = location.pathname.startsWith('/status');
   const isDownloadRoute = location.pathname.startsWith('/download');
   const isAboutRoute = location.pathname.startsWith('/about');
+  const isSupportRoute = location.pathname.startsWith('/support');
   const primaryNavRoutes = routeMetaList.filter((route) => route.id !== 'privacy' && route.id !== 'terms');
   const legalFooterRoutes = routeMetaList.filter((route) => route.id === 'privacy' || route.id === 'terms');
 
@@ -34,7 +36,7 @@ export function SiteLayout(): React.JSX.Element {
           <div className="flex flex-col gap-3 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center justify-between md:block">
               <NavLink to="/" className="text-[30px] font-semibold tracking-tight text-ink">
-                chrony
+                <Wordmark />
               </NavLink>
               <button
                 type="button"
@@ -110,7 +112,7 @@ export function SiteLayout(): React.JSX.Element {
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
           className={cn(
             'mx-auto max-w-6xl px-6 pb-16',
-            isHomeRoute || isStatusRoute || isDownloadRoute || isAboutRoute ? 'pt-0' : 'pt-28 md:pt-32',
+            isHomeRoute || isStatusRoute || isDownloadRoute || isAboutRoute || isSupportRoute ? 'pt-0' : 'pt-28 md:pt-32',
           )}
         >
           <Outlet />
@@ -120,7 +122,9 @@ export function SiteLayout(): React.JSX.Element {
       <footer className="border-t border-line bg-page/96">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 py-10 md:grid-cols-2 md:items-end">
           <div>
-            <p className="text-lg font-semibold">chrony</p>
+            <p className="text-lg font-semibold">
+              <Wordmark />
+            </p>
             <p className="mt-2 max-w-md text-xs leading-6 text-muted">
               One shared pad, always ready. Built by Stage Devices.
             </p>

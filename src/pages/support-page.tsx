@@ -1,6 +1,7 @@
 import type React from 'react';
 import { Activity, Mail, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ChronyShader } from '@/components/brand/chrony-shader';
 import { Accordion } from '@/components/ui/accordion';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,11 +15,38 @@ export function SupportPage(): React.JSX.Element {
 
   return (
     <div className="space-y-8">
-      <section className="space-y-3">
-        <h1 className="text-4xl font-semibold text-ink md:text-5xl">Support</h1>
-        <p className="max-w-3xl text-[15px] leading-8 text-muted">
-          For help with sign-in, sync, subscriptions, or account deletion, contact Stage Devices support.
-        </p>
+      <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-panel">
+        <ChronyShader intensity="mono" />
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-10 pt-24 md:pb-12 md:pt-28">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start">
+            <div className="space-y-4">
+              <h1 className="text-4xl font-semibold text-ink md:text-5xl">Support</h1>
+              <p className="max-w-3xl text-[15px] leading-8 text-muted">
+                For help with sign-in, sync, subscriptions, or account deletion, contact Stage Devices support.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a href={`mailto:${supportEmail}`} className={cn(buttonVariants({ variant: 'default' }), 'inline-flex')}>
+                  Email {supportEmail}
+                </a>
+                <Link to="/status" className={cn(buttonVariants({ variant: 'secondary' }), 'inline-flex')}>
+                  Open public status page
+                </Link>
+              </div>
+            </div>
+
+            <Card className="bg-page/84 backdrop-blur-md">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Wrench className="size-4" /> Fastest route to resolution
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-[13px] leading-7 text-muted">
+                Include reproduction steps, exact timestamps, app version, device model, and OS version so support can
+                trace sync and diagnostics events immediately.
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </section>
 
       <div className="grid gap-4 md:grid-cols-2">

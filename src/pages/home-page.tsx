@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ChronyShader } from '@/components/brand/chrony-shader';
 import { ProductFamilyScene } from '@/components/brand/product-family-scene';
+import { Wordmark, renderWordmarkCopy } from '@/components/brand/wordmark';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -32,8 +33,9 @@ export function HomePage(): React.JSX.Element {
             <div className="max-w-3xl space-y-6">
               <h1 className="text-5xl font-semibold leading-[1.02] text-ink md:text-7xl">One shared pad, always ready.</h1>
               <p className="max-w-3xl text-[18px] leading-9 text-muted md:text-[20px]">
-                chrony is built for fast writing and code-aware notes. Start in plain text, keep sync in the
-                background, and unlock pro tools when you want deeper workflow control.
+                {renderWordmarkCopy(
+                  'chrony is built for fast writing and code-aware notes. Start in plain text, keep sync in the background, and unlock pro tools when you want deeper workflow control.',
+                )}
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <a
@@ -43,7 +45,7 @@ export function HomePage(): React.JSX.Element {
                   aria-label="Open App Store listing"
                   className={cn(buttonVariants({ variant: 'default', size: 'lg' }), 'gap-2')}
                 >
-                  Download chrony <ArrowRight className="size-4" />
+                  Download <Wordmark /> <ArrowRight className="size-4" />
                 </a>
                 <Link className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'gap-2')} to="/about">
                   Read the product story <ArrowRight className="size-4" />
@@ -77,14 +79,14 @@ export function HomePage(): React.JSX.Element {
               viewport={{ once: true, margin: '-70px' }}
               transition={{ duration: 0.24, delay: index * 0.03 }}
             >
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle>{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="leading-7">{feature.body}</CardDescription>
-                </CardContent>
-              </Card>
+                <Card className="h-full">
+                  <CardHeader>
+                    <CardTitle>{renderWordmarkCopy(feature.title)}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="leading-7">{renderWordmarkCopy(feature.body)}</CardDescription>
+                  </CardContent>
+                </Card>
             </motion.div>
           ))}
         </div>

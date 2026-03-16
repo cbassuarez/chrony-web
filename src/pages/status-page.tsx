@@ -60,12 +60,12 @@ export function StatusPage(): React.JSX.Element {
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.14)_46%,rgba(255,255,255,0.40)_100%)]"
+            className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_22%,rgba(255,255,255,0.18)_62%,rgba(255,255,255,0.72)_100%)]"
           />
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20 h-28 bg-gradient-to-b from-white/56 via-white/28 to-transparent" />
-          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-white/30 to-transparent" />
-          <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-white/30 to-transparent" />
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-gradient-to-t from-white/20 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20 h-32 bg-gradient-to-b from-white/88 via-white/54 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-20 w-24 bg-gradient-to-r from-white/62 via-white/34 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-gradient-to-l from-white/62 via-white/34 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-20 bg-gradient-to-t from-white/42 to-transparent" />
         </section>
 
         <section className="grid gap-3 md:grid-cols-3">

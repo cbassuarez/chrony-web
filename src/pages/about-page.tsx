@@ -3,6 +3,7 @@ import { ArrowRight, ExternalLink, Mail } from 'lucide-react';
 import { ChronyShader } from '@/components/brand/chrony-shader';
 import { ProductFamilyScene } from '@/components/brand/product-family-scene';
 import { ProductSnapshotGrid } from '@/components/brand/product-snapshot-grid';
+import { Wordmark, renderWordmarkCopy } from '@/components/brand/wordmark';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { routeMetaById, appStoreUrl, statusPageUrl, supportEmail } from '@/content/site';
@@ -36,21 +37,25 @@ export function AboutPage(): React.JSX.Element {
 
   return (
     <div className="space-y-10">
-      <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-panel">
+      <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-[#0b0907]">
         <ChronyShader intensity="obsidian" />
 
         <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Product story</p>
-              <h1 className="text-4xl font-semibold leading-[1.06] text-ink md:text-6xl">About chrony</h1>
-              <p className="max-w-3xl text-[15px] leading-8 text-muted md:text-[17px]">
-                chrony is built around a simple premise: writing should start immediately, not after project setup,
-                template choice, or app navigation. Open the app and your shared pad is already there.
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-200/92">Product story</p>
+              <h1 className="text-4xl font-semibold leading-[1.06] text-slate-50 md:text-6xl">
+                About <Wordmark className="text-slate-50" />
+              </h1>
+              <p className="max-w-3xl text-[15px] leading-8 text-slate-200/92 md:text-[17px]">
+                {renderWordmarkCopy(
+                  'chrony is built around a simple premise: writing should start immediately, not after project setup, template choice, or app navigation. Open the app and your shared pad is already there.',
+                )}
               </p>
-              <p className="max-w-3xl text-[15px] leading-8 text-muted md:text-[17px]">
-                The same document context follows you across iPhone, iPad, and Mac, with synchronization in the
-                background and pro workflows available when you need deeper control.
+              <p className="max-w-3xl text-[15px] leading-8 text-slate-200/92 md:text-[17px]">
+                {renderWordmarkCopy(
+                  'The same document context follows you across iPhone, iPad, and Mac, with synchronization in the background and pro workflows available when you need deeper control.',
+                )}
               </p>
               <div className="flex flex-wrap gap-3">
                 <a
@@ -59,7 +64,7 @@ export function AboutPage(): React.JSX.Element {
                   rel="noreferrer"
                   className={cn(buttonVariants({ variant: 'default', size: 'lg' }), 'inline-flex gap-2')}
                 >
-                  Download chrony <ArrowRight className="size-4" />
+                  Download <Wordmark /> <ArrowRight className="size-4" />
                 </a>
                 <a
                   href={statusPageUrl}
@@ -102,8 +107,8 @@ export function AboutPage(): React.JSX.Element {
                   {milestone.id}
                 </p>
                 <div className="space-y-1.5">
-                  <h3 className="text-lg font-semibold text-ink">{milestone.title}</h3>
-                  <p className="text-[13px] leading-7 text-muted">{milestone.body}</p>
+                  <h3 className="text-lg font-semibold text-ink">{renderWordmarkCopy(milestone.title)}</h3>
+                  <p className="text-[13px] leading-7 text-muted">{renderWordmarkCopy(milestone.body)}</p>
                 </div>
               </article>
             ))}
@@ -115,8 +120,9 @@ export function AboutPage(): React.JSX.Element {
         <div className="space-y-2">
           <h2 className="text-3xl font-semibold text-ink">Cross-device continuity</h2>
           <p className="max-w-3xl text-[14px] leading-7 text-muted">
-            chrony keeps the same workflow geometry and top chrome behavior as you move between tablet and desktop,
-            reducing relearning friction and preserving momentum.
+            {renderWordmarkCopy(
+              'chrony keeps the same workflow geometry and top chrome behavior as you move between tablet and desktop, reducing relearning friction and preserving momentum.',
+            )}
           </p>
         </div>
         <ProductSnapshotGrid ids={['ipadAurora', 'macObsidian']} className="lg:grid-cols-2" />
@@ -128,8 +134,9 @@ export function AboutPage(): React.JSX.Element {
         </CardHeader>
         <CardContent className="space-y-5 text-[13px] leading-7 text-muted">
           <p>
-            chrony ships through Apple storefronts and pairs product features with clear support and status pathways so
-            users can install confidently and recover quickly when issues arise.
+            {renderWordmarkCopy(
+              'chrony ships through Apple storefronts and pairs product features with clear support and status pathways so users can install confidently and recover quickly when issues arise.',
+            )}
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -138,7 +145,7 @@ export function AboutPage(): React.JSX.Element {
               rel="noreferrer"
               className={cn(buttonVariants({ variant: 'default' }), 'inline-flex gap-2')}
             >
-              Download chrony <ArrowRight className="size-4" />
+              Download <Wordmark /> <ArrowRight className="size-4" />
             </a>
             <a href={`mailto:${supportEmail}`} className={cn(buttonVariants({ variant: 'secondary' }), 'inline-flex gap-2')}>
               Support <Mail className="size-4" />
