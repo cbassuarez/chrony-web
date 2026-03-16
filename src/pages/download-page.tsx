@@ -115,10 +115,10 @@ export function DownloadPage(): React.JSX.Element {
                 </a>
               </div>
 
-              <div className="grid gap-2 text-[12px] text-muted sm:grid-cols-3">
+              <div className="flex flex-wrap gap-2 text-[12px] text-muted">
                 {trustHighlights.map((highlight) => (
-                  <div key={highlight.label} className="rounded-compact border border-line bg-page/75 px-3 py-2">
-                    <div className="flex items-center gap-2">
+                  <div key={highlight.label} className="inline-flex w-fit rounded-compact border border-line bg-page/75 px-3 py-2">
+                    <div className="flex items-center gap-2 whitespace-nowrap">
                       <span className="inline-flex size-4 shrink-0 text-muted">{highlight.icon}</span>
                       <span>{highlight.label}</span>
                     </div>

@@ -13,6 +13,7 @@ export function SiteLayout(): React.JSX.Element {
   const isHomeRoute = location.pathname === '/';
   const isStatusRoute = location.pathname.startsWith('/status');
   const isDownloadRoute = location.pathname.startsWith('/download');
+  const isAboutRoute = location.pathname.startsWith('/about');
   const primaryNavRoutes = routeMetaList.filter((route) => route.id !== 'privacy' && route.id !== 'terms');
   const legalFooterRoutes = routeMetaList.filter((route) => route.id === 'privacy' || route.id === 'terms');
 
@@ -37,7 +38,7 @@ export function SiteLayout(): React.JSX.Element {
               </NavLink>
               <button
                 type="button"
-                className="rounded-compact border border-line bg-row px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink md:hidden"
+                className="chrony-button rounded-compact border border-line bg-row px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted hover:text-ink md:hidden"
                 onClick={() => setIsMobileNavOpen((value) => !value)}
                 aria-expanded={isMobileNavOpen}
                 aria-controls="mobile-primary-nav"
@@ -54,7 +55,7 @@ export function SiteLayout(): React.JSX.Element {
                   end={route.path === '/'}
                   className={({ isActive }) =>
                     cn(
-                      'rounded-compact border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors whitespace-nowrap',
+                      'chrony-button rounded-compact border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] whitespace-nowrap',
                       isActive ? 'border-rowBorder bg-rowActive text-ink' : 'border-line bg-row text-muted hover:text-ink',
                     )
                   }
@@ -83,7 +84,7 @@ export function SiteLayout(): React.JSX.Element {
                       end={route.path === '/'}
                       className={({ isActive }) =>
                         cn(
-                          'rounded-compact border px-3 py-2 text-left text-xs font-semibold uppercase tracking-[0.12em] transition-colors',
+                          'chrony-button rounded-compact border px-3 py-2 text-left text-xs font-semibold uppercase tracking-[0.12em]',
                           isActive
                             ? 'border-rowBorder bg-rowActive text-ink'
                             : 'border-line bg-row text-muted hover:text-ink',
@@ -107,7 +108,10 @@ export function SiteLayout(): React.JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
-          className={cn('mx-auto max-w-6xl px-6 pb-16', isHomeRoute || isStatusRoute || isDownloadRoute ? 'pt-0' : 'pt-28 md:pt-32')}
+          className={cn(
+            'mx-auto max-w-6xl px-6 pb-16',
+            isHomeRoute || isStatusRoute || isDownloadRoute || isAboutRoute ? 'pt-0' : 'pt-28 md:pt-32',
+          )}
         >
           <Outlet />
         </motion.main>

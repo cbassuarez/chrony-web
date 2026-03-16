@@ -37,9 +37,9 @@ export function AboutPage(): React.JSX.Element {
   return (
     <div className="space-y-10">
       <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-panel">
-        <ChronyShader intensity="hero" />
+        <ChronyShader intensity="obsidian" />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-8 md:pb-20 md:pt-12">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="space-y-5">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Product story</p>
@@ -75,7 +75,7 @@ export function AboutPage(): React.JSX.Element {
               </div>
             </div>
 
-            <ProductFamilyScene className="mt-2 lg:mt-0" />
+            <ProductFamilyScene className="mt-2 lg:mt-0" theme="obsidian" />
           </div>
         </div>
       </section>
@@ -119,7 +119,7 @@ export function AboutPage(): React.JSX.Element {
             reducing relearning friction and preserving momentum.
           </p>
         </div>
-        <ProductSnapshotGrid ids={['ipadWarm', 'macWarm']} className="lg:grid-cols-2" />
+        <ProductSnapshotGrid ids={['ipadAurora', 'macObsidian']} className="lg:grid-cols-2" />
       </section>
 
       <Card>

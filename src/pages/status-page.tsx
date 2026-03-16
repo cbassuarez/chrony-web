@@ -40,12 +40,17 @@ export function StatusPage(): React.JSX.Element {
         <section
           aria-label="Live status timeline"
           data-cursor="status"
-          className="overflow-hidden rounded-standard border border-line bg-transparent shadow-card"
+          className="relative isolate overflow-hidden rounded-standard border border-line/90 bg-page/35 shadow-[0_18px_38px_-26px_hsl(var(--ink)/0.38)]"
         >
+          <div aria-hidden className="absolute inset-0 z-0 bg-page/78 backdrop-blur-[1.2px]" />
+          <div
+            aria-hidden
+            className="absolute inset-0 z-0 rounded-[inherit] border border-white/45 shadow-[inset_0_1px_0_hsl(0_0%_100%_/_0.65),inset_0_-1px_0_hsl(0_0%_100%_/_0.28)]"
+          />
           <iframe
             src={statusPageUrl}
             title="chrony service status"
-            className="h-[1200px] w-full bg-transparent md:h-[1320px]"
+            className="relative z-10 h-[1200px] w-full bg-transparent md:h-[1320px]"
             style={{ backgroundColor: 'transparent' }}
             loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -53,6 +58,14 @@ export function StatusPage(): React.JSX.Element {
             scrolling="no"
             allowTransparency
           />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.14)_46%,rgba(255,255,255,0.40)_100%)]"
+          />
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20 h-28 bg-gradient-to-b from-white/56 via-white/28 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-white/30 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-white/30 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-gradient-to-t from-white/20 to-transparent" />
         </section>
 
         <section className="grid gap-3 md:grid-cols-3">

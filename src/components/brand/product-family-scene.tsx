@@ -5,14 +5,34 @@ import { cn } from '@/lib/cn';
 
 interface ProductFamilySceneProps {
   className?: string;
+  theme?: 'warm' | 'obsidian';
 }
 
-export function ProductFamilyScene({ className }: ProductFamilySceneProps): React.JSX.Element {
+export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilySceneProps): React.JSX.Element {
   const reduceMotion = useReducedMotion();
+  const snapshots =
+    theme === 'obsidian'
+      ? {
+          mac: productSnapshots.macObsidian,
+          ipad: productSnapshots.ipadAurora,
+          iphone: productSnapshots.iphoneGraphite,
+        }
+      : {
+          mac: productSnapshots.macWarm,
+          ipad: productSnapshots.ipadWarm,
+          iphone: productSnapshots.iphoneWarm,
+        };
 
   return (
     <div className={cn('relative mx-auto h-[300px] w-full max-w-[860px] md:h-[380px] lg:h-[420px] [perspective:2000px]', className)}>
-      <div className="absolute inset-0 rounded-[24px] bg-gradient-to-br from-page/90 via-page/60 to-page/90 blur-2xl" />
+      <div
+        className={cn(
+          'absolute inset-0 rounded-[24px] blur-2xl',
+          theme === 'obsidian'
+            ? 'bg-gradient-to-br from-slate-300/65 via-slate-200/35 to-slate-400/55'
+            : 'bg-gradient-to-br from-page/90 via-page/60 to-page/90',
+        )}
+      />
 
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -23,8 +43,8 @@ export function ProductFamilyScene({ className }: ProductFamilySceneProps): Reac
         style={{ transform: 'rotateY(-17deg) rotateX(8deg)' }}
       >
         <img
-          src={productSnapshots.macWarm.src}
-          alt={productSnapshots.macWarm.alt}
+          src={snapshots.mac.src}
+          alt={snapshots.mac.alt}
           className="w-full rounded-standard border border-line/70 shadow-[0_44px_84px_-52px_hsl(var(--ink)/0.72)]"
           loading="eager"
         />
@@ -39,8 +59,8 @@ export function ProductFamilyScene({ className }: ProductFamilySceneProps): Reac
         style={{ transform: 'rotateY(19deg) rotateX(8deg)' }}
       >
         <img
-          src={productSnapshots.ipadWarm.src}
-          alt={productSnapshots.ipadWarm.alt}
+          src={snapshots.ipad.src}
+          alt={snapshots.ipad.alt}
           className="w-full rounded-standard border border-line/70 shadow-[0_42px_80px_-56px_hsl(var(--ink)/0.72)]"
           loading="eager"
         />
@@ -55,8 +75,8 @@ export function ProductFamilyScene({ className }: ProductFamilySceneProps): Reac
         style={{ transform: 'rotateY(-20deg) rotateX(9deg)' }}
       >
         <img
-          src={productSnapshots.iphoneWarm.src}
-          alt={productSnapshots.iphoneWarm.alt}
+          src={snapshots.iphone.src}
+          alt={snapshots.iphone.alt}
           className="w-full rounded-standard border border-line/70 shadow-[0_38px_72px_-48px_hsl(var(--ink)/0.82)]"
           loading="eager"
         />
@@ -69,7 +89,12 @@ export function ProductFamilyScene({ className }: ProductFamilySceneProps): Reac
         transition={{ duration: 0.42, delay: 0.16, ease: [0.2, 0.7, 0.2, 1] }}
         className="absolute bottom-[3%] left-[8%] w-[18%] max-w-[124px] min-w-[68px]"
       >
-        <div className="rounded-[24%] border border-line/80 bg-page/90 p-2 shadow-[0_30px_56px_-36px_hsl(var(--ink)/0.88)] backdrop-blur-sm">
+        <div
+          className={cn(
+            'rounded-[24%] border p-2 shadow-[0_30px_56px_-36px_hsl(var(--ink)/0.88)] backdrop-blur-sm',
+            theme === 'obsidian' ? 'border-line/70 bg-slate-900/78' : 'border-line/80 bg-page/90',
+          )}
+        >
           <img src={appIconAsset.src} alt={appIconAsset.alt} className="w-full rounded-[20%]" loading="eager" />
         </div>
       </motion.div>

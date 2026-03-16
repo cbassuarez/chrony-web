@@ -1,9 +1,10 @@
 import type React from 'react';
 import { Activity, Mail, Wrench } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Accordion } from '@/components/ui/accordion';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { routeMetaById, statusPageUrl, supportEmail, supportFaq } from '@/content/site';
+import { routeMetaById, supportEmail, supportFaq } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { usePageMeta } from '@/lib/seo';
 
@@ -43,9 +44,9 @@ export function SupportPage(): React.JSX.Element {
           </CardHeader>
           <CardContent className="space-y-4 text-[13px] text-muted">
             <p>Check current incidents, maintenance windows, and uptime history.</p>
-            <a href={statusPageUrl} target="_blank" rel="noreferrer" className={cn(buttonVariants({ variant: 'secondary' }), 'inline-flex')}>
+            <Link to="/status" className={cn(buttonVariants({ variant: 'secondary' }), 'inline-flex')}>
               Open public status page
-            </a>
+            </Link>
           </CardContent>
         </Card>
       </div>
