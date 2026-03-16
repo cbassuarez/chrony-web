@@ -16,25 +16,36 @@ export function ChronyShader({ className, intensity = 'hero' }: ChronyShaderProp
     <div aria-hidden className={cn('pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]', className)}>
       <MeshGradient
         className="h-full w-full"
-        colors={isHero ? ['#efe6d2', '#d7cdb7', '#9dbdbb', '#547c88'] : ['#f3ebda', '#ded3bd', '#b8c8c6']}
-        distortion={isHero ? 0.65 : 0.3}
-        swirl={isHero ? 0.42 : 0.16}
-        grainMixer={0.12}
-        grainOverlay={0.16}
-        speed={reduceMotion ? 0 : isHero ? 0.12 : 0.04}
+        colors={isHero ? ['#ffffff', '#f6f6f6', '#d6d6d6', '#2d7891'] : ['#ffffff', '#f6f6f6', '#ebeff4']}
+        distortion={isHero ? 1.15 : 0.48}
+        swirl={isHero ? 0.92 : 0.22}
+        grainMixer={0.2}
+        grainOverlay={0.18}
+        speed={reduceMotion ? 0 : isHero ? 0.26 : 0.08}
       />
+      {isHero ? (
+        <MeshGradient
+          className="absolute inset-0 mix-blend-screen opacity-80"
+          colors={['#ffffff', '#2d7891', '#1f5fbf', '#ffffff']}
+          distortion={0.5}
+          swirl={1}
+          grainMixer={0}
+          grainOverlay={0}
+          speed={reduceMotion ? 0 : 0.18}
+        />
+      ) : null}
       <PaperTexture
-        className="absolute inset-0 mix-blend-multiply"
-        colorBack="#f6efdf"
-        colorFront={isHero ? '#d7cab0' : '#ddd4bf'}
-        contrast={0.35}
-        roughness={0.3}
-        fiber={0.25}
-        crumples={0.3}
-        folds={isHero ? 0.5 : 0.2}
-        fade={0.08}
+        className="absolute inset-0 mix-blend-multiply opacity-95"
+        colorBack="#ffffff"
+        colorFront="#e8eaef"
+        contrast={0.22}
+        roughness={0.24}
+        fiber={0.2}
+        crumples={0.24}
+        folds={isHero ? 0.45 : 0.12}
+        fade={0.06}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-page/35 via-page/20 to-page" />
+      <div className="absolute inset-0 bg-gradient-to-b from-page/25 via-page/35 to-page" />
     </div>
   );
 }

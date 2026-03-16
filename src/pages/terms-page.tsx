@@ -10,8 +10,8 @@ export function TermsPage(): React.JSX.Element {
   return (
     <div className="space-y-8">
       <section className="space-y-3">
-        <h1 className="font-serif text-4xl text-ink md:text-5xl">Terms of Use</h1>
-        <p className="max-w-3xl text-base leading-8 text-muted">
+        <h1 className="font-sans text-4xl text-ink md:text-5xl">Terms of Use</h1>
+        <p className="max-w-3xl text-[15px] leading-8 text-muted">
           These terms govern your use of chrony and chronyapp.com. They are an initial operational draft and may be
           updated as the product evolves.
         </p>
@@ -23,7 +23,7 @@ export function TermsPage(): React.JSX.Element {
             <CardHeader>
               <CardTitle className="text-2xl">{section.heading}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-sm leading-7 text-muted">
+            <CardContent className="space-y-4 text-[13px] leading-7 text-muted">
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

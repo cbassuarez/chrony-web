@@ -1,4 +1,4 @@
-export type RouteId = 'home' | 'download' | 'privacy' | 'terms' | 'support' | 'about';
+export type RouteId = 'home' | 'download' | 'privacy' | 'terms' | 'support' | 'about' | 'status';
 
 export interface RouteMeta {
   id: RouteId;
@@ -25,8 +25,20 @@ export interface LegalSection {
   bullets?: string[];
 }
 
+export interface HeartbeatSuggestion {
+  name: string;
+  cadence: string;
+  target: string;
+  why: string;
+}
+
 export const supportEmail = 'developer@stagedevices.com';
 export const appStoreUrl = 'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213';
+export const appStoreBadgeHref =
+  'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213?itscg=30200&itsct=apps_box_badge&mttnsubad=6756780213';
+export const appStoreBadgeImageUrl =
+  'https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1766361600';
+export const statusPageUrl = 'https://stagedevices.betteruptime.com';
 
 export const routeMetaList: RouteMeta[] = [
   {
@@ -83,6 +95,15 @@ export const routeMetaList: RouteMeta[] = [
       'Learn about chrony, its synced writing workflow, and the Stage Devices team building it.',
     canonicalPath: '/about',
   },
+  {
+    id: 'status',
+    label: 'Status',
+    path: '/status',
+    title: 'chrony Status and Monitoring | Stage Devices',
+    description:
+      'Live service status and recommended Better Stack heartbeats for chrony synchronization and billing systems.',
+    canonicalPath: '/status',
+  },
 ];
 
 export const routeMetaById: Record<RouteId, RouteMeta> = routeMetaList.reduce(
@@ -96,27 +117,27 @@ export const routeMetaById: Record<RouteId, RouteMeta> = routeMetaList.reduce(
 export const featureCards: FeatureCardContent[] = [
   {
     title: 'One continuous pad',
-    body: 'Start writing instantly. No setup, no project switching, no friction.',
+    body: 'Start writing immediately. No setup, no project handoff, no waiting for state.',
   },
   {
     title: 'Synced account pad',
-    body: 'Sign in with Apple to keep one shared document synced across your devices.',
+    body: 'Sign in with Apple and keep one shared document synchronized across devices.',
   },
   {
-    title: 'Language-aware editing',
-    body: 'Stay in AUTO for everyday notes, or switch language mode when code readability matters.',
+    title: 'Language-aware readability',
+    body: 'Stay in AUTO for daily writing, then switch language mode for code-focused clarity.',
   },
   {
-    title: 'Theme and typography control',
-    body: 'Tune paper tone, contrast, and text feel for long writing sessions.',
+    title: 'Arctic chrome controls',
+    body: 'Compact radii, restrained surfaces, and low-friction controls modeled after app chrome.',
   },
   {
-    title: 'chrony pro toolkit',
+    title: 'chrony pro workflows',
     body: 'Unlock timeline restore, sanitize and validate, pinned snapshots, and advanced language workflows.',
   },
   {
-    title: 'Focused support flow',
-    body: 'Send support diagnostics with app version and state details to accelerate troubleshooting.',
+    title: 'Support diagnostics pipeline',
+    body: 'Copy diagnostics in-app and send support reports with app version and subscription state details.',
   },
 ];
 
@@ -133,17 +154,68 @@ export const supportFaq: FaqItem[] = [
   {
     question: 'Why is sync not updating?',
     answer:
-      'Confirm Sign in with Apple is active, check connectivity, and reopen the app. chrony retries background synchronization and shows in-app sync status when issues occur.',
+      'Confirm Sign in with Apple is active, check connectivity, and reopen the app. chrony retries background synchronization and surfaces sync state in chrome hints.',
   },
   {
     question: 'How do I manage or cancel subscriptions?',
     answer:
-      'Subscriptions are managed through the App Store account subscription settings. Billing and refunds are handled by Apple according to App Store policies.',
+      'Subscriptions are managed through App Store account subscription settings. Billing and refunds are handled by Apple according to App Store policies.',
   },
   {
     question: 'How do I delete synced account data?',
     answer:
-      'Use the in-app account deletion flow while signed in. chrony requests remote pad deletion and queues retry if the server is temporarily unavailable.',
+      'Use the in-app account deletion flow while signed in. chrony requests remote pad deletion and queues retries if the backend is temporarily unavailable.',
+  },
+];
+
+export const heartbeatSuggestions: HeartbeatSuggestion[] = [
+  {
+    name: 'chrony-web-home',
+    cadence: 'Every 1 minute',
+    target: 'URL monitor: https://chronyapp.com/',
+    why: 'Catches DNS, TLS, GitHub Pages, and custom-domain failures immediately.',
+  },
+  {
+    name: 'chrony-sync-api-health',
+    cadence: 'Every 1 minute',
+    target: 'URL monitor: https://syncnote-service.onrender.com/healthz (or /health)',
+    why: 'Tracks backend availability used by pad sync and restore operations.',
+  },
+  {
+    name: 'chrony-sync-websocket-open',
+    cadence: 'Every 2 minutes',
+    target: 'Synthetic check: open wss://syncnote-service.onrender.com/ws/pads/heartbeat-pad',
+    why: 'Detects websocket regressions that HTTP-only checks can miss.',
+  },
+  {
+    name: 'chrony-snapshot-roundtrip',
+    cadence: 'Every 5 minutes',
+    target: 'Synthetic check: write + read a small synthetic pad snapshot via /pads endpoints',
+    why: 'Validates the real user path for sync persistence and snapshot retrieval.',
+  },
+  {
+    name: 'chrony-billing-offer-status',
+    cadence: 'Every 5 minutes',
+    target: 'URL monitor: /billing/promotional-offers/status',
+    why: 'Confirms billing metadata endpoint is reachable for paywall offer state.',
+  },
+  {
+    name: 'chrony-billing-signature-post',
+    cadence: 'Every 10 minutes',
+    target: 'Synthetic POST monitor: /billing/promotional-offers/signature with test payload',
+    why: 'Ensures offer signature path can complete for eligible users.',
+  },
+  {
+    name: 'chrony-account-deletion-worker',
+    cadence: 'Ping every 5 minutes from deletion retry worker',
+    target: 'Heartbeat monitor endpoint generated by Better Stack',
+    why: 'Alerts when deletion retry processing stalls even if API is up.',
+  },
+  {
+    name: 'chrony-pages-deploy-heartbeat',
+    cadence: 'Ping on successful deploy',
+    target: 'Heartbeat monitor endpoint called from GitHub Actions after deploy-pages step',
+    why: 'Confirms your deployment pipeline is shipping fresh builds as expected.',
   },
 ];
 

@@ -12,27 +12,22 @@ const config: Config = {
         panel: 'hsl(var(--panel))',
         line: 'hsl(var(--line))',
         accent: 'hsl(var(--accent))',
-        glow: 'hsl(var(--glow))',
+        row: 'hsl(var(--row))',
+        rowActive: 'hsl(var(--row-active))',
+        rowBorder: 'hsl(var(--row-active-border))',
       },
       borderRadius: {
-        xl: '1rem',
+        micro: '4px',
+        compact: '6px',
+        standard: '8px',
       },
       boxShadow: {
-        card: '0 16px 48px -24px hsl(var(--ink) / 0.35)',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
-      },
-      animation: {
-        float: 'float 8s ease-in-out infinite',
+        card: '0 14px 34px -24px hsl(var(--ink) / 0.28)',
       },
       fontFamily: {
         sans: ['"IBM Plex Sans"', '"Avenir Next"', '"Segoe UI"', 'sans-serif'],
-        serif: ['"Source Serif 4"', '"Iowan Old Style"', 'serif'],
-        mono: ['"JetBrains Mono"', '"SFMono-Regular"', 'monospace'],
+        serif: ['"IBM Plex Sans"', '"Avenir Next"', '"Segoe UI"', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', '"SFMono-Regular"', 'Menlo', 'monospace'],
       },
     },
   },
