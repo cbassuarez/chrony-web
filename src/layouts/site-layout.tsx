@@ -10,6 +10,7 @@ export function SiteLayout(): React.JSX.Element {
   const location = useLocation();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const isHomeRoute = location.pathname === '/';
+  const isStatusRoute = location.pathname.startsWith('/status');
 
   useEffect(() => {
     enforceApexCanonicalHost();
@@ -100,7 +101,7 @@ export function SiteLayout(): React.JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
-          className={cn('mx-auto max-w-6xl px-6 pb-16', isHomeRoute ? 'pt-0' : 'pt-28 md:pt-32')}
+          className={cn('mx-auto max-w-6xl px-6 pb-16', isHomeRoute || isStatusRoute ? 'pt-0' : 'pt-28 md:pt-32')}
         >
           <Outlet />
         </motion.main>

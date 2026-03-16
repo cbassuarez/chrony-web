@@ -37,6 +37,20 @@ export function StatusPage(): React.JSX.Element {
           </div>
         </section>
 
+        <section
+          aria-label="Live status timeline"
+          className="overflow-hidden rounded-standard border border-line bg-page/95 shadow-card backdrop-blur-md"
+        >
+          <iframe
+            src={statusPageUrl}
+            title="chrony service status"
+            className="h-[82vh] min-h-[680px] w-full"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+          />
+        </section>
+
         <section className="grid gap-3 md:grid-cols-3">
           <Card className="bg-page/88 backdrop-blur-md">
             <CardHeader>
@@ -72,38 +86,37 @@ export function StatusPage(): React.JSX.Element {
           </Card>
         </section>
 
-        <Card className="bg-page/90 backdrop-blur-md">
-          <CardHeader>
-            <CardTitle>Embedded Better Stack status</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-[13px] text-muted">
-              If your browser blocks embedded content, use the direct status link above.
-            </p>
-            <div className="overflow-hidden rounded-standard border border-line bg-page">
-              <iframe
-                src={statusPageUrl}
-                title="chrony service status"
-                className="h-[80vh] min-h-[640px] w-full"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-              />
-            </div>
-          </CardContent>
-        </Card>
-
         <Card className="bg-page/88 backdrop-blur-md">
-          <CardHeader>
+          <CardHeader className="space-y-3">
             <CardTitle>Monitoring scope</CardTitle>
+            <p className="max-w-4xl text-[13px] leading-7 text-muted">
+              Status coverage spans user-visible availability, realtime transport health, data integrity checks, and
+              release pipeline signals so outages and degradations are surfaced quickly with clear impact context.
+            </p>
           </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 text-[13px] leading-7 text-muted">
-              <li>Sync API availability and latency</li>
-              <li>Websocket connectivity for live pad updates</li>
-              <li>Snapshot write and restore health checks</li>
-              <li>Website and deployment pipeline uptime</li>
-            </ul>
+          <CardContent className="space-y-4">
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="rounded-compact border border-line bg-page/80 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">Core platform</p>
+                <ul className="mt-2 space-y-1 text-[13px] leading-7 text-muted">
+                  <li>Sync API uptime and p95 latency tracking</li>
+                  <li>Auth/session verification for signed-in pad access</li>
+                  <li>Snapshot write and restore health probes</li>
+                </ul>
+              </div>
+              <div className="rounded-compact border border-line bg-page/80 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">Realtime and delivery</p>
+                <ul className="mt-2 space-y-1 text-[13px] leading-7 text-muted">
+                  <li>Websocket connect, reconnect, and message flow checks</li>
+                  <li>Website edge uptime, TLS, and DNS availability</li>
+                  <li>Deployment pipeline and post-release smoke monitoring</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-[12px] leading-6 text-muted">
+              Alerts are configured for sustained impact thresholds, and incident updates are published with current
+              investigation status, mitigation progress, and recovery confirmation.
+            </p>
           </CardContent>
         </Card>
       </div>
