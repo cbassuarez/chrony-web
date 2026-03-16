@@ -111,17 +111,17 @@ export function PricingPage(): React.JSX.Element {
               </div>
             </div>
 
-            <Card className="bg-page/84 backdrop-blur-md">
+            <Card className="border-white/30 bg-[#111217]/64 text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md">
               <CardHeader className="space-y-3">
                 <CardTitle className="text-xl">Why teams choose Pro</CardTitle>
-                <CardDescription className="text-[13px] leading-7">
+                <CardDescription className="text-[13px] leading-7 text-white/82">
                   Outcome-focused tools for technical writing, revision safety, and support-ready diagnostics.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2 text-[13px] leading-7 text-muted">
+              <CardContent className="space-y-2 text-[13px] leading-7 text-white/90">
                 {proUnlocks.slice(0, 3).map((value) => (
                   <p key={value} className="flex items-start gap-2">
-                    <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-rowBorder" />
+                    <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-white/76" />
                     <span>{renderWordmarkCopy(value)}</span>
                   </p>
                 ))}
@@ -225,7 +225,7 @@ export function PricingPage(): React.JSX.Element {
             <table className="w-full min-w-[520px] border-collapse text-left text-[12px] leading-6 text-muted">
               <thead>
                 <tr className="border-b border-line text-[11px] uppercase tracking-[0.12em]">
-                  <th className="py-2 pr-3 font-semibold text-muted">Outcome</th>
+                  <th className="py-2 pr-3 font-semibold text-muted">Feature</th>
                   <th className="py-2 pr-3 font-semibold text-muted">Free</th>
                   <th className="py-2 font-semibold text-muted">Pro</th>
                 </tr>
