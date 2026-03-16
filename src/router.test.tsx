@@ -16,8 +16,8 @@ describe('Chrony route coverage', () => {
 
   it('renders download route with app store CTA', async () => {
     renderPath('/download');
-    expect(await screen.findByRole('heading', { name: /download chrony/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /open app store listing/i })).toHaveAttribute(
+    expect(await screen.findByRole('heading', { name: /download on the app store and mac app store/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /open iphone and ipad listing/i })).toHaveAttribute(
       'href',
       'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213',
     );
@@ -43,6 +43,11 @@ describe('Chrony route coverage', () => {
   it('renders about route', async () => {
     renderPath('/about');
     expect(await screen.findByRole('heading', { name: /about chrony/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /chrony journey/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: /^download chrony$/i })[0]).toHaveAttribute(
+      'href',
+      'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213',
+    );
   });
 
   it('renders status route with embedded status iframe', async () => {

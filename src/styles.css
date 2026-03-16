@@ -59,20 +59,38 @@ a {
 
 @media (hover: hover) and (pointer: fine) {
   html.chrony-cursor-enabled,
+  body.chrony-cursor-enabled,
   html.chrony-cursor-enabled * {
     cursor: none !important;
   }
 
+  body.chrony-cursor-enabled * {
+    cursor: none !important;
+  }
+
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'],
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'],
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] * {
     cursor: auto !important;
   }
 
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'] * {
+    cursor: auto !important;
+  }
+
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] input,
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'] input,
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] textarea,
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'] textarea,
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] [contenteditable='true'],
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'] [contenteditable='true'],
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] pre,
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'] pre,
   html.chrony-cursor-enabled[data-chrony-cursor-mode='text'] code {
+    cursor: text !important;
+  }
+
+  body.chrony-cursor-enabled[data-chrony-cursor-mode='text'] code {
     cursor: text !important;
   }
 }

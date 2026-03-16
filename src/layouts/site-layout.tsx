@@ -12,6 +12,9 @@ export function SiteLayout(): React.JSX.Element {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const isHomeRoute = location.pathname === '/';
   const isStatusRoute = location.pathname.startsWith('/status');
+  const isDownloadRoute = location.pathname.startsWith('/download');
+  const primaryNavRoutes = routeMetaList.filter((route) => route.id !== 'privacy' && route.id !== 'terms');
+  const legalFooterRoutes = routeMetaList.filter((route) => route.id === 'privacy' || route.id === 'terms');
 
   useEffect(() => {
     enforceApexCanonicalHost();
@@ -44,7 +47,7 @@ export function SiteLayout(): React.JSX.Element {
               </button>
             </div>
             <nav aria-label="Primary" className="hidden w-full gap-2 md:flex md:w-auto md:pb-0">
-              {routeMetaList.map((route) => (
+              {primaryNavRoutes.map((route) => (
                 <NavLink
                   key={route.id}
                   to={route.path}
@@ -73,7 +76,7 @@ export function SiteLayout(): React.JSX.Element {
                 className="border-t border-line bg-page px-4 pb-4 pt-2 sm:px-5 md:hidden"
               >
                 <nav aria-label="Mobile primary" className="flex flex-col gap-2">
-                  {routeMetaList.map((route) => (
+                  {primaryNavRoutes.map((route) => (
                     <NavLink
                       key={route.id}
                       to={route.path}
@@ -104,7 +107,7 @@ export function SiteLayout(): React.JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
-          className={cn('mx-auto max-w-6xl px-6 pb-16', isHomeRoute || isStatusRoute ? 'pt-0' : 'pt-28 md:pt-32')}
+          className={cn('mx-auto max-w-6xl px-6 pb-16', isHomeRoute || isStatusRoute || isDownloadRoute ? 'pt-0' : 'pt-28 md:pt-32')}
         >
           <Outlet />
         </motion.main>
@@ -123,6 +126,13 @@ export function SiteLayout(): React.JSX.Element {
             <a className="mt-2 inline-block text-xs text-ink underline-offset-4 hover:underline" href={`mailto:${supportEmail}`}>
               {supportEmail}
             </a>
+            <div className="mt-4 flex flex-wrap gap-4">
+              {legalFooterRoutes.map((route) => (
+                <NavLink key={route.id} to={route.path} className="text-[11px] uppercase tracking-[0.14em] text-muted hover:text-ink">
+                  {route.label}
+                </NavLink>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
