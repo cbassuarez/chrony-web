@@ -44,10 +44,6 @@ body {
   font-feature-settings: 'liga' 1, 'kern' 1;
 }
 
-.chrony-wordmark-adaptive {
-  mix-blend-mode: difference;
-}
-
 a {
   color: inherit;
 }
@@ -70,6 +66,15 @@ a {
   animation: chrony-cursor-status-pulse 1.8s ease-in-out infinite;
 }
 
+@keyframes chrony-button-sheen-pass {
+  from {
+    transform: translate3d(-170%, 0, 0) skewX(-18deg);
+  }
+  to {
+    transform: translate3d(185%, 0, 0) skewX(-18deg);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .chrony-button {
     position: relative;
@@ -77,12 +82,14 @@ a {
     overflow: hidden;
     transform: translateY(0);
     transition:
-      color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: 0 1px 0 hsl(var(--page) / 0.72) inset;
+      color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow:
+      0 1px 0 hsl(var(--page) / 0.66) inset,
+      0 0 0 1px hsl(var(--ink) / 0.02) inset;
     will-change: transform;
   }
 
@@ -91,42 +98,63 @@ a {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(
-      112deg,
-      transparent 0%,
-      transparent 34%,
-      hsl(var(--page) / 0.62) 45%,
-      hsl(var(--ink) / 0.08) 50%,
-      transparent 58%,
-      transparent 100%
-    );
-    transform: translate3d(-128%, 0, 0);
-    opacity: 0;
+    background: linear-gradient(to bottom, hsl(var(--page) / 0.16), transparent 58%);
     pointer-events: none;
-    transition:
-      transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transition: opacity 180ms cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 0;
   }
 
-  .chrony-button:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 14px 24px -22px hsl(var(--ink) / 0.72),
-      0 0 0 1px hsl(var(--ink) / 0.05) inset;
+  .chrony-button::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      transparent 40%,
+      hsl(var(--page) / 0.52) 48%,
+      hsl(var(--ink) / 0.1) 52%,
+      transparent 60%,
+      transparent 100%
+    );
+    transform: translate3d(-170%, 0, 0) skewX(-18deg);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform;
   }
 
-  .chrony-button:hover::before {
-    transform: translate3d(128%, 0, 0);
+  .chrony-button:hover,
+  .chrony-button:focus-visible {
+    transform: translateY(-1px);
+    box-shadow:
+      0 12px 20px -20px hsl(var(--ink) / 0.65),
+      0 0 0 1px hsl(var(--ink) / 0.06) inset;
+  }
+
+  .chrony-button:hover::before,
+  .chrony-button:focus-visible::before {
     opacity: 1;
+  }
+
+  .chrony-button:hover::after,
+  .chrony-button:focus-visible::after {
+    opacity: 1;
+    animation: chrony-button-sheen-pass 740ms cubic-bezier(0.22, 1, 0.36, 1) 1;
   }
 
   .chrony-button:active {
     transform: translateY(0);
-    transition-duration: 120ms;
+    transition-duration: 110ms;
     box-shadow:
-      0 8px 16px -16px hsl(var(--ink) / 0.55),
+      0 6px 12px -14px hsl(var(--ink) / 0.5),
       0 0 0 1px hsl(var(--ink) / 0.08) inset;
+  }
+
+  .chrony-button:active::after {
+    animation-duration: 320ms;
   }
 
   .chrony-button:disabled {
@@ -175,6 +203,10 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .chrony-button::after {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {

@@ -3,18 +3,11 @@ import { cn } from '@/lib/cn';
 
 interface WordmarkProps {
   className?: string;
-  tone?: 'inherit' | 'adaptive' | 'light' | 'dark';
+  tone?: 'inherit' | 'light' | 'dark';
 }
 
 export function Wordmark({ className, tone = 'inherit' }: WordmarkProps): React.JSX.Element {
-  const toneClass =
-    tone === 'adaptive'
-      ? 'chrony-wordmark-adaptive text-white'
-      : tone === 'light'
-        ? 'text-white'
-        : tone === 'dark'
-          ? 'text-ink'
-          : 'text-inherit';
+  const toneClass = tone === 'light' ? 'text-white' : tone === 'dark' ? 'text-ink' : 'text-inherit';
 
   return (
     <span className={cn('chrony-wordmark normal-case font-semibold tracking-tight', toneClass, className)}>

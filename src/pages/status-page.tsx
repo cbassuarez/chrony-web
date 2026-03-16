@@ -62,6 +62,10 @@ export function StatusPage(): React.JSX.Element {
           />
           <div
             aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 z-30 h-[86px] border-b border-slate-200/85 bg-white/96 shadow-[0_10px_26px_-24px_rgba(15,23,42,0.38)] md:h-[94px]"
+          />
+          <div
+            aria-hidden
             className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_22%,rgba(255,255,255,0.18)_62%,rgba(255,255,255,0.72)_100%)]"
           />
           <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20 h-32 bg-gradient-to-b from-white/88 via-white/54 to-transparent" />

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="chrony favicon">
+  <defs>
+    <linearGradient id="chronyFaviconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111217" />
+      <stop offset="100%" stop-color="#1A1D24" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#chronyFaviconBg)" />
+  <rect x="8" y="9" width="48" height="1.5" rx="0.75" fill="#2B3340" opacity="0.82" />
+  <text
+    x="11.5"
+    y="39"
+    fill="#F4F7FD"
+    font-family="'IBM Plex Sans','Avenir Next','Segoe UI',sans-serif"
+    font-size="22"
+    font-weight="650"
+    letter-spacing="-1.2"
+  >
+    ch
+  </text>
+  <rect x="11.5" y="45" width="24.5" height="2.8" rx="1.4" fill="#EAB85A" />
+</svg>

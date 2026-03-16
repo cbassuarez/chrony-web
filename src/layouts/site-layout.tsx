@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { ArcticSyncCursor } from '@/components/brand/arctic-sync-cursor';
@@ -10,7 +10,9 @@ import { enforceApexCanonicalHost } from '@/lib/seo';
 
 export function SiteLayout(): React.JSX.Element {
   const location = useLocation();
+  const headerRef = useRef<HTMLElement>(null);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [headerWordmarkTone, setHeaderWordmarkTone] = useState<'light' | 'dark'>('dark');
   const isHomeRoute = location.pathname === '/';
   const isStatusRoute = location.pathname.startsWith('/status');
   const isDownloadRoute = location.pathname.startsWith('/download');
@@ -27,16 +29,63 @@ export function SiteLayout(): React.JSX.Element {
     setIsMobileNavOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const resolveTone = (): void => {
+      const header = headerRef.current;
+      if (!header) {
+        return;
+      }
+
+      const headerRect = header.getBoundingClientRect();
+      const sampleY = headerRect.top + headerRect.height * 0.5;
+      const sampleX = headerRect.left + Math.min(130, Math.max(92, headerRect.width * 0.15));
+
+      let nextTone: 'light' | 'dark' = 'dark';
+      const toneZones = document.querySelectorAll<HTMLElement>('[data-header-wordmark]');
+
+      toneZones.forEach((zone) => {
+        const rect = zone.getBoundingClientRect();
+        const withinX = sampleX >= rect.left && sampleX <= rect.right;
+        const withinY = sampleY >= rect.top && sampleY <= rect.bottom;
+        const tone = zone.dataset.headerWordmark;
+
+        if (withinX && withinY && (tone === 'light' || tone === 'dark')) {
+          nextTone = tone;
+        }
+      });
+
+      setHeaderWordmarkTone((current) => (current === nextTone ? current : nextTone));
+    };
+
+    const onScroll = (): void => {
+      resolveTone();
+    };
+
+    const onResize = (): void => {
+      resolveTone();
+    };
+
+    const rafId = window.requestAnimationFrame(resolveTone);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [location.pathname]);
+
   return (
     <div className="min-h-screen bg-page text-ink">
       <ArcticSyncCursor />
 
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+      <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
         <div className="mx-auto max-w-6xl overflow-hidden rounded-standard border border-line bg-page/92 shadow-[0_16px_40px_-28px_hsl(var(--ink)/0.55)] backdrop-blur-md">
           <div className="flex flex-col gap-3 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center justify-between md:block">
               <NavLink to="/" className="text-[30px] font-semibold tracking-tight text-ink">
-                <Wordmark tone="adaptive" />
+                <Wordmark tone={headerWordmarkTone} />
               </NavLink>
               <button
                 type="button"
@@ -123,7 +172,7 @@ export function SiteLayout(): React.JSX.Element {
         <div className="mx-auto grid max-w-6xl gap-6 px-6 py-10 md:grid-cols-2 md:items-end">
           <div>
             <p className="text-lg font-semibold">
-              <Wordmark tone="adaptive" />
+              <Wordmark tone="dark" />
             </p>
             <p className="mt-2 max-w-md text-xs leading-6 text-muted">
               One shared pad, always ready. Built by Stage Devices.
