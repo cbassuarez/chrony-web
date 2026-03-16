@@ -76,6 +76,52 @@ export function SiteLayout(): React.JSX.Element {
     };
   }, [location.pathname]);
 
+  useEffect(() => {
+    let rafId: number | null = null;
+    let pendingEvent: PointerEvent | null = null;
+
+    const updateSheen = (): void => {
+      rafId = null;
+      const event = pendingEvent;
+      if (!event || !(event.target instanceof Element)) {
+        return;
+      }
+
+      const button = event.target.closest<HTMLElement>('.chrony-button');
+      if (!button) {
+        return;
+      }
+
+      const rect = button.getBoundingClientRect();
+      if (!rect.width || !rect.height) {
+        return;
+      }
+
+      const x = Math.min(100, Math.max(0, ((event.clientX - rect.left) / rect.width) * 100));
+      const y = Math.min(100, Math.max(0, ((event.clientY - rect.top) / rect.height) * 100));
+
+      button.style.setProperty('--chrony-sheen-x', `${x}%`);
+      button.style.setProperty('--chrony-sheen-y', `${y}%`);
+    };
+
+    const onPointerMove = (event: PointerEvent): void => {
+      pendingEvent = event;
+      if (rafId !== null) {
+        return;
+      }
+      rafId = window.requestAnimationFrame(updateSheen);
+    };
+
+    document.addEventListener('pointermove', onPointerMove, { passive: true });
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      document.removeEventListener('pointermove', onPointerMove);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-page text-ink">
       <ArcticSyncCursor />
