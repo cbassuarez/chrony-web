@@ -4,7 +4,6 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ChronyShader } from '@/components/brand/chrony-shader';
 import { ProductFamilyScene } from '@/components/brand/product-family-scene';
-import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -28,10 +27,9 @@ export function HomePage(): React.JSX.Element {
       <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-panel">
         <ChronyShader intensity="hero" />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 md:py-20">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
             <div className="max-w-3xl space-y-6">
-              <Badge variant="accent">Stage Devices</Badge>
               <h1 className="text-5xl font-semibold leading-[1.02] text-ink md:text-7xl">One shared pad, always ready.</h1>
               <p className="max-w-3xl text-[18px] leading-9 text-muted md:text-[20px]">
                 chrony is built for fast writing and code-aware notes. Start in plain text, keep sync in the

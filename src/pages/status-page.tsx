@@ -14,7 +14,7 @@ export function StatusPage(): React.JSX.Element {
   return (
     <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-panel">
       <ChronyShader intensity="hero" />
-      <div className="relative z-10 mx-auto min-h-[calc(100vh-10rem)] max-w-6xl space-y-6 px-6 py-10 md:py-12">
+      <div className="relative z-10 mx-auto min-h-[calc(100vh-10rem)] max-w-6xl space-y-6 px-6 pb-10 pt-24 md:pb-12 md:pt-28">
         <section className="space-y-4">
           <p className="text-xs uppercase tracking-[0.16em] text-muted">Service health</p>
           <h1 className="text-4xl font-semibold text-ink md:text-5xl">Production status and incident timeline</h1>
@@ -44,10 +44,11 @@ export function StatusPage(): React.JSX.Element {
           <iframe
             src={statusPageUrl}
             title="chrony service status"
-            className="h-[82vh] min-h-[680px] w-full"
+            className="h-[1200px] w-full md:h-[1320px]"
             loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
             sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+            scrolling="no"
           />
         </section>
 
