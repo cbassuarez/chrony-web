@@ -37,7 +37,7 @@ export function AboutPage(): React.JSX.Element {
 
   return (
     <div className="space-y-10">
-      <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-[#0b0907]">
+      <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden border-y border-line bg-[#111217]">
         <ChronyShader intensity="obsidian" />
 
         <div className="relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-24 md:pb-20 md:pt-28">

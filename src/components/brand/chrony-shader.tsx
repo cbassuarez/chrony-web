@@ -17,12 +17,12 @@ export function ChronyShader({ className, intensity = 'hero' }: ChronyShaderProp
   const meshColors = isHero
     ? ['#ffffff', '#f6f6f6', '#d6d6d6', '#2d7891']
     : isObsidian
-      ? ['#070606', '#17110e', '#4a2d13', '#d38a2f']
+      ? ['#111217', '#1A1D24', '#2B3340', '#EAB85A']
       : isMono
         ? ['#ffffff', '#f4f4f4', '#d8d8d8', '#282828']
         : ['#ffffff', '#f6f6f6', '#ebeff4'];
   const accentColors = isObsidian
-    ? ['#f6d79d', '#eca546', '#9a5314', '#f9e7c5']
+    ? ['#111217', '#EAB85A', '#F0B35A', '#1A1D24']
     : isMono
       ? ['#ffffff', '#8d8d8d', '#1c1c1c', '#ffffff']
       : ['#ffffff', '#2d7891', '#1f5fbf', '#ffffff'];
@@ -32,28 +32,31 @@ export function ChronyShader({ className, intensity = 'hero' }: ChronyShaderProp
       <MeshGradient
         className="h-full w-full"
         colors={meshColors}
-        distortion={isHero ? 1.15 : isObsidian ? 1.06 : isMono ? 0.78 : 0.48}
-        swirl={isHero ? 0.92 : isObsidian ? 0.72 : isMono ? 0.55 : 0.22}
+        distortion={isHero || isObsidian ? 1.15 : isMono ? 0.78 : 0.48}
+        swirl={isHero || isObsidian ? 0.92 : isMono ? 0.55 : 0.22}
         grainMixer={0.2}
         grainOverlay={0.18}
-        speed={reduceMotion ? 0 : isHero ? 0.26 : isObsidian ? 0.18 : isMono ? 0.12 : 0.08}
+        speed={reduceMotion ? 0 : isHero || isObsidian ? 0.26 : isMono ? 0.12 : 0.08}
       />
       {showAccent ? (
         <MeshGradient
-          className={cn('absolute inset-0', isObsidian ? 'mix-blend-screen opacity-50' : isMono ? 'mix-blend-screen opacity-40' : 'mix-blend-screen opacity-80')}
+          className={cn(
+            'absolute inset-0',
+            isObsidian ? 'mix-blend-overlay opacity-42' : isMono ? 'mix-blend-screen opacity-40' : 'mix-blend-screen opacity-80',
+          )}
           colors={accentColors}
           distortion={isObsidian ? 0.5 : isMono ? 0.4 : 0.5}
-          swirl={isObsidian ? 0.7 : isMono ? 0.45 : 1}
+          swirl={isObsidian ? 1 : isMono ? 0.45 : 1}
           grainMixer={0}
           grainOverlay={0}
-          speed={reduceMotion ? 0 : isObsidian ? 0.12 : isMono ? 0.08 : 0.18}
+          speed={reduceMotion ? 0 : isObsidian ? 0.18 : isMono ? 0.08 : 0.18}
         />
       ) : null}
       <PaperTexture
-        className={cn('absolute inset-0 opacity-95', isObsidian ? 'mix-blend-screen' : 'mix-blend-multiply')}
-        colorBack={isObsidian ? '#0b0907' : '#ffffff'}
-        colorFront={isObsidian ? '#f3c578' : isMono ? '#e0e0e0' : '#e8eaef'}
-        contrast={isObsidian ? 0.28 : isMono ? 0.2 : 0.22}
+        className={cn('absolute inset-0 opacity-95', isObsidian ? 'mix-blend-soft-light' : 'mix-blend-multiply')}
+        colorBack={isObsidian ? '#111217' : '#ffffff'}
+        colorFront={isObsidian ? '#2B3340' : isMono ? '#e0e0e0' : '#e8eaef'}
+        contrast={isObsidian ? 0.2 : isMono ? 0.2 : 0.22}
         roughness={isObsidian ? 0.3 : 0.24}
         fiber={0.2}
         crumples={isObsidian ? 0.32 : 0.24}
@@ -64,7 +67,7 @@ export function ChronyShader({ className, intensity = 'hero' }: ChronyShaderProp
         className={cn(
           'absolute inset-0 bg-gradient-to-b',
           isObsidian
-            ? 'from-black/52 via-[#1a130d]/42 to-page/92'
+            ? 'from-[#111217]/42 via-[#1A1D24]/58 to-[#111217]'
             : isMono
               ? 'from-white/36 via-slate-100/28 to-page'
               : 'from-page/25 via-page/35 to-page',
