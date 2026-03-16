@@ -18,8 +18,9 @@ export function SiteLayout(): React.JSX.Element {
   const isDownloadRoute = location.pathname.startsWith('/download');
   const isAboutRoute = location.pathname.startsWith('/about');
   const isSupportRoute = location.pathname.startsWith('/support');
-  const primaryNavRoutes = routeMetaList.filter((route) => route.id !== 'privacy' && route.id !== 'terms');
-  const legalFooterRoutes = routeMetaList.filter((route) => route.id === 'privacy' || route.id === 'terms');
+  const isPricingRoute = location.pathname.startsWith('/pricing');
+  const primaryNavRoutes = routeMetaList.filter((route) => route.navPlacement === 'primary');
+  const legalFooterRoutes = routeMetaList.filter((route) => route.navPlacement === 'footer');
 
   useEffect(() => {
     enforceApexCanonicalHost();
@@ -207,7 +208,9 @@ export function SiteLayout(): React.JSX.Element {
           transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
           className={cn(
             'mx-auto max-w-6xl px-6 pb-16',
-            isHomeRoute || isStatusRoute || isDownloadRoute || isAboutRoute || isSupportRoute ? 'pt-0' : 'pt-28 md:pt-32',
+            isHomeRoute || isStatusRoute || isDownloadRoute || isAboutRoute || isSupportRoute || isPricingRoute
+              ? 'pt-0'
+              : 'pt-28 md:pt-32',
           )}
         >
           <Outlet />

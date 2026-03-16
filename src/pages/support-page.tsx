@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Activity, Mail, Wrench } from 'lucide-react';
+import { Activity, ArrowRight, Mail, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ChronyShader } from '@/components/brand/chrony-shader';
 import { renderWordmarkCopy } from '@/components/brand/wordmark';
@@ -31,6 +31,9 @@ export function SupportPage(): React.JSX.Element {
                 </a>
                 <Link to="/status" className={cn(buttonVariants({ variant: 'secondary' }), 'inline-flex')}>
                   Open public status page
+                </Link>
+                <Link to="/pricing" className={cn(buttonVariants({ variant: 'outline' }), 'inline-flex gap-2')}>
+                  See Pro pricing <ArrowRight className="size-4" />
                 </Link>
               </div>
             </div>

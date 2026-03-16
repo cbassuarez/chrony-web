@@ -1,9 +1,11 @@
-export type RouteId = 'home' | 'download' | 'privacy' | 'terms' | 'support' | 'about' | 'status';
+export type RouteId = 'home' | 'download' | 'privacy' | 'terms' | 'support' | 'about' | 'status' | 'pricing';
+export type RouteNavPlacement = 'primary' | 'footer' | 'none';
 
 export interface RouteMeta {
   id: RouteId;
   label: string;
   path: string;
+  navPlacement: RouteNavPlacement;
   title: string;
   description: string;
   canonicalPath: string;
@@ -25,6 +27,43 @@ export interface LegalSection {
   bullets?: string[];
 }
 
+export type PricingPlanId = 'monthly' | 'annual';
+
+export interface PricingPlanContent {
+  id: PricingPlanId;
+  label: string;
+  cadence: string;
+  priceUsdCents: number;
+  ctaLabel: string;
+  description: string;
+  trialLabel?: string;
+  recommended?: boolean;
+}
+
+export interface PricingDisclosureContent {
+  id: string;
+  body: string;
+}
+
+export interface PricingFaqContent {
+  question: string;
+  answer: string;
+}
+
+export interface ProPricingContent {
+  storefrontCurrencyCode: 'USD';
+  storefrontLabel: string;
+  trustLine: string;
+  plans: Record<PricingPlanId, PricingPlanContent>;
+  disclosures: PricingDisclosureContent[];
+  faq: PricingFaqContent[];
+}
+
+export interface ProPricingDerivedValues {
+  monthlyEquivalentUsdCents: number;
+  annualSavingsUsdCents: number;
+  annualSavingsPercent: number;
+}
 
 export const supportEmail = 'developer@stagedevices.com';
 export const appStoreUrl = 'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213';
@@ -37,11 +76,84 @@ export const macAppStoreBadgeImageUrl =
   'https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us?releaseDate=1766361600';
 export const statusPageUrl = 'https://status.chronyapp.com';
 
+export const proPricingContent: ProPricingContent = {
+  storefrontCurrencyCode: 'USD',
+  storefrontLabel: 'United States storefront',
+  trustLine: 'No web checkout, billed by Apple.',
+  plans: {
+    monthly: {
+      id: 'monthly',
+      label: 'Monthly',
+      cadence: 'per month',
+      priceUsdCents: 199,
+      ctaLabel: 'Choose monthly in App Store',
+      description: 'Flexible month-to-month access to chrony Pro workflows.',
+    },
+    annual: {
+      id: 'annual',
+      label: 'Annual',
+      cadence: 'per year',
+      priceUsdCents: 1799,
+      trialLabel: '1 week free',
+      ctaLabel: 'Start annual trial in App Store',
+      description: 'Best value for sustained writing, recovery, and diagnostics workflows.',
+      recommended: true,
+    },
+  },
+  disclosures: [
+    {
+      id: 'apple-billing',
+      body: 'Subscriptions, renewals, and refunds are handled by Apple under App Store terms.',
+    },
+    {
+      id: 'storefront-variance',
+      body: 'Prices shown are USD examples for the United States storefront and may vary by region, tax, and exchange rate.',
+    },
+    {
+      id: 'manage-cancel',
+      body: 'Manage or cancel at any time in Apple account subscription settings.',
+    },
+  ],
+  faq: [
+    {
+      question: 'When does billing start for annual?',
+      answer: 'Billing begins when the trial period ends unless canceled before trial completion.',
+    },
+    {
+      question: 'Can I cancel before renewal?',
+      answer: 'Yes. Manage or cancel in Apple subscription settings to prevent the next renewal.',
+    },
+    {
+      question: 'Do all accounts get the trial?',
+      answer: 'Trial eligibility is determined by Apple based on account and storefront policy.',
+    },
+    {
+      question: 'Who handles escalation for billing or entitlement issues?',
+      answer: `For entitlement sync issues contact ${supportEmail}; for billing disputes Apple Support is the payment authority.`,
+    },
+  ],
+};
+
+export function deriveProPricingValues(content: ProPricingContent = proPricingContent): ProPricingDerivedValues {
+  const monthlyCost = content.plans.monthly.priceUsdCents * 12;
+  const annualCost = content.plans.annual.priceUsdCents;
+  const annualSavingsUsdCents = Math.max(monthlyCost - annualCost, 0);
+  const annualSavingsPercent = monthlyCost > 0 ? Math.round((annualSavingsUsdCents / monthlyCost) * 100) : 0;
+  const monthlyEquivalentUsdCents = Math.round(annualCost / 12);
+
+  return {
+    monthlyEquivalentUsdCents,
+    annualSavingsUsdCents,
+    annualSavingsPercent,
+  };
+}
+
 export const routeMetaList: RouteMeta[] = [
   {
     id: 'home',
     label: 'Home',
     path: '/',
+    navPlacement: 'primary',
     title: 'chrony | One shared pad, always ready',
     description:
       'chrony is a synced notepad for writing, coding, and keeping one shared pad always ready.',
@@ -51,6 +163,7 @@ export const routeMetaList: RouteMeta[] = [
     id: 'download',
     label: 'Download',
     path: '/download',
+    navPlacement: 'primary',
     title: 'Download chrony for iPhone, iPad, and Mac',
     description:
       'Install chrony from the App Store and use one synced pad across iPhone, iPad, and Mac.',
@@ -60,6 +173,7 @@ export const routeMetaList: RouteMeta[] = [
     id: 'privacy',
     label: 'Privacy',
     path: '/privacy',
+    navPlacement: 'footer',
     title: 'chrony Privacy Policy | Stage Devices',
     description:
       'Read how Stage Devices collects, uses, and protects data for chrony and its synced notepad services.',
@@ -69,6 +183,7 @@ export const routeMetaList: RouteMeta[] = [
     id: 'terms',
     label: 'Terms',
     path: '/terms',
+    navPlacement: 'footer',
     title: 'chrony Terms of Use | Stage Devices',
     description:
       'Terms of Use for chrony, including subscriptions, service availability, and account responsibilities.',
@@ -78,6 +193,7 @@ export const routeMetaList: RouteMeta[] = [
     id: 'support',
     label: 'Support',
     path: '/support',
+    navPlacement: 'primary',
     title: 'chrony Support | Stage Devices',
     description:
       'Contact chrony support, review troubleshooting FAQs, and send diagnostics for faster help.',
@@ -87,6 +203,7 @@ export const routeMetaList: RouteMeta[] = [
     id: 'about',
     label: 'About',
     path: '/about',
+    navPlacement: 'primary',
     title: 'About chrony | Stage Devices',
     description:
       'Learn about chrony, its synced writing workflow, and the Stage Devices team building it.',
@@ -96,9 +213,20 @@ export const routeMetaList: RouteMeta[] = [
     id: 'status',
     label: 'Status',
     path: '/status',
+    navPlacement: 'primary',
     title: 'chrony Status | Stage Devices',
     description: 'Live chrony status from Better Stack.',
     canonicalPath: '/status',
+  },
+  {
+    id: 'pricing',
+    label: 'Pricing',
+    path: '/pricing',
+    navPlacement: 'none',
+    title: 'chrony Pro pricing | App Store billing',
+    description:
+      'Compare chrony Pro monthly and annual plans, including free trial details, App Store billing, and support pathways.',
+    canonicalPath: '/pricing',
   },
 ];
 

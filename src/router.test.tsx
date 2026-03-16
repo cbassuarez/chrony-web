@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { appStoreUrl, deriveProPricingValues, proPricingContent } from '@/content/site';
 import { appRouteObjects } from '@/router';
 
 function renderPath(path: string): void {
@@ -17,10 +18,7 @@ describe('Chrony route coverage', () => {
   it('renders download route with app store CTA', async () => {
     renderPath('/download');
     expect(await screen.findByRole('heading', { name: /download on the app store and mac app store/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /open iphone and ipad listing/i })).toHaveAttribute(
-      'href',
-      'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213',
-    );
+    expect(screen.getByRole('link', { name: /open iphone and ipad listing/i })).toHaveAttribute('href', appStoreUrl);
   });
 
   it('renders privacy route with Stage Devices policy content', async () => {
@@ -44,10 +42,22 @@ describe('Chrony route coverage', () => {
     renderPath('/about');
     expect(await screen.findByRole('heading', { name: /about chrony/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /chrony journey/i })).toBeInTheDocument();
-    expect(screen.getAllByRole('link', { name: /^download chrony$/i })[0]).toHaveAttribute(
-      'href',
-      'https://apps.apple.com/us/app/chrony-synced-notepad/id6756780213',
-    );
+    expect(screen.getAllByRole('link', { name: /^download chrony$/i })[0]).toHaveAttribute('href', appStoreUrl);
+  });
+
+  it('renders pricing route with computed plan values and keeps pricing out of header nav', async () => {
+    const derivedPricing = deriveProPricingValues(proPricingContent);
+    renderPath('/pricing');
+
+    expect(await screen.findByRole('heading', { name: /pricing for deeper writing and recovery workflows/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^monthly$/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^annual$/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /open app store listing/i })).toHaveAttribute('href', appStoreUrl);
+    expect(screen.getByText('$1.99')).toBeInTheDocument();
+    expect(screen.getByText('$17.99')).toBeInTheDocument();
+    expect(screen.getByText('1 week free')).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`save ${derivedPricing.annualSavingsPercent}%`, 'i'))).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^pricing$/i })).not.toBeInTheDocument();
   });
 
   it('renders status route with embedded status iframe', async () => {

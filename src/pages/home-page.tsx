@@ -50,6 +50,9 @@ export function HomePage(): React.JSX.Element {
                 <Link className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'gap-2')} to="/about">
                   Read the product story <ArrowRight className="size-4" />
                 </Link>
+                <Link className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'gap-2')} to="/pricing">
+                  See Pro pricing <ArrowRight className="size-4" />
+                </Link>
               </div>
               <a href={appStoreBadgeHref} style={{ display: 'inline-block' }}>
                 <img

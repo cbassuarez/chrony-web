@@ -99,6 +99,9 @@ export function DownloadPage(): React.JSX.Element {
                 >
                   Open Mac App Store listing <ExternalLink className="size-4" />
                 </a>
+                <Link to="/pricing" className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'inline-flex gap-2')}>
+                  See Pro pricing <ArrowUpRight className="size-4" />
+                </Link>
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
