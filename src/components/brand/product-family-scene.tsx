@@ -40,10 +40,7 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         <img
           src={snapshots.mac.src}
           alt={snapshots.mac.alt}
-          className={cn(
-            'w-full rounded-standard shadow-[0_44px_84px_-52px_hsl(var(--ink)/0.72)]',
-            theme === 'obsidian' ? 'border-0' : 'border border-line/70',
-          )}
+          className="w-full rounded-standard shadow-[0_44px_84px_-52px_hsl(var(--ink)/0.72)]"
           loading="eager"
         />
       </motion.div>
@@ -59,10 +56,7 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         <img
           src={snapshots.ipad.src}
           alt={snapshots.ipad.alt}
-          className={cn(
-            'w-full rounded-standard shadow-[0_42px_80px_-56px_hsl(var(--ink)/0.72)]',
-            theme === 'obsidian' ? 'border-0' : 'border border-line/70',
-          )}
+          className="w-full rounded-standard shadow-[0_42px_80px_-56px_hsl(var(--ink)/0.72)]"
           loading="eager"
         />
       </motion.div>
@@ -78,10 +72,7 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         <img
           src={snapshots.iphone.src}
           alt={snapshots.iphone.alt}
-          className={cn(
-            'w-full rounded-standard shadow-[0_38px_72px_-48px_hsl(var(--ink)/0.82)]',
-            theme === 'obsidian' ? 'border-0' : 'border border-line/70',
-          )}
+          className="w-full rounded-standard shadow-[0_38px_72px_-48px_hsl(var(--ink)/0.82)]"
           loading="eager"
         />
       </motion.div>
@@ -93,14 +84,12 @@ export function ProductFamilyScene({ className, theme = 'warm' }: ProductFamilyS
         transition={{ duration: 0.42, delay: 0.16, ease: [0.2, 0.7, 0.2, 1] }}
         className="absolute bottom-[3%] left-[8%] w-[18%] max-w-[124px] min-w-[68px]"
       >
-        <div
-          className={cn(
-            'rounded-[24%] p-2 shadow-[0_30px_56px_-36px_hsl(var(--ink)/0.88)]',
-            theme === 'obsidian' ? 'border-0 bg-transparent backdrop-blur-0' : 'border border-line/80 bg-page/90 backdrop-blur-sm',
-          )}
-        >
-          <img src={appIconAsset.src} alt={appIconAsset.alt} className="w-full rounded-[20%]" loading="eager" />
-        </div>
+        <img
+          src={appIconAsset.src}
+          alt={appIconAsset.alt}
+          className="w-full rounded-[20%] shadow-[0_30px_56px_-36px_hsl(var(--ink)/0.88)]"
+          loading="eager"
+        />
       </motion.div>
     </div>
   );
