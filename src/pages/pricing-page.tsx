@@ -113,7 +113,7 @@ export function PricingPage(): React.JSX.Element {
 
             <Card className="border-white/30 bg-[#111217]/64 text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md">
               <CardHeader className="space-y-3">
-                <CardTitle className="text-xl">Why teams choose Pro</CardTitle>
+                <CardTitle className="text-xl text-white">Why teams choose Pro</CardTitle>
                 <CardDescription className="text-[13px] leading-7 text-white/82">
                   Outcome-focused tools for technical writing, revision safety, and support-ready diagnostics.
                 </CardDescription>
