@@ -221,21 +221,21 @@ export function PricingPage(): React.JSX.Element {
           <CardHeader className="space-y-2">
             <CardTitle className="text-2xl">Free vs Pro</CardTitle>
           </CardHeader>
-          <CardContent className="overflow-x-auto">
-            <table className="w-full min-w-[520px] border-collapse text-left text-[12px] leading-6 text-muted">
+          <CardContent>
+            <table className="w-full table-fixed border-collapse text-left text-[11px] leading-5 text-muted sm:text-[12px] sm:leading-6">
               <thead>
                 <tr className="border-b border-line text-[11px] uppercase tracking-[0.12em]">
-                  <th className="py-2 pr-3 font-semibold text-muted">Feature</th>
-                  <th className="py-2 pr-3 font-semibold text-muted">Free</th>
-                  <th className="py-2 font-semibold text-muted">Pro</th>
+                  <th className="w-[31%] py-2 pr-3 font-semibold text-muted">Feature</th>
+                  <th className="w-[31%] py-2 pr-3 font-semibold text-muted">Free</th>
+                  <th className="w-[38%] py-2 font-semibold text-muted">Pro</th>
                 </tr>
               </thead>
               <tbody>
                 {freeVsProRows.map((row) => (
                   <tr key={row.outcome} className="border-b border-line last:border-b-0">
-                    <td className="py-2.5 pr-3 text-ink">{row.outcome}</td>
-                    <td className="py-2.5 pr-3">{row.free}</td>
-                    <td className="py-2.5">{row.pro}</td>
+                    <td className="py-2.5 pr-3 align-top text-ink">{row.outcome}</td>
+                    <td className="py-2.5 pr-3 align-top">{row.free}</td>
+                    <td className="py-2.5 align-top">{row.pro}</td>
                   </tr>
                 ))}
               </tbody>
