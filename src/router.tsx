@@ -8,7 +8,6 @@ const PrivacyPage = lazy(() => import('@/pages/privacy-page').then((mod) => ({ d
 const TermsPage = lazy(() => import('@/pages/terms-page').then((mod) => ({ default: mod.TermsPage })));
 const SupportPage = lazy(() => import('@/pages/support-page').then((mod) => ({ default: mod.SupportPage })));
 const AboutPage = lazy(() => import('@/pages/about-page').then((mod) => ({ default: mod.AboutPage })));
-const StatusPage = lazy(() => import('@/pages/status-page').then((mod) => ({ default: mod.StatusPage })));
 const NotFoundPage = lazy(() => import('@/pages/not-found-page').then((mod) => ({ default: mod.NotFoundPage })));
 
 function withSuspense(node: ReactNode): ReactNode {
@@ -36,7 +35,6 @@ export const appRouteObjects: RouteObject[] = [
       { path: 'terms', element: withSuspense(<TermsPage />) },
       { path: 'support', element: withSuspense(<SupportPage />) },
       { path: 'about', element: withSuspense(<AboutPage />) },
-      { path: 'status', element: withSuspense(<StatusPage />) },
       { path: '*', element: withSuspense(<NotFoundPage />) },
     ],
   },

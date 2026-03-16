@@ -1,6 +1,5 @@
 import type React from 'react';
 import { Activity, Mail, Wrench } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { Accordion } from '@/components/ui/accordion';
 import { buttonVariants } from '@/components/ui/button-styles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -47,9 +46,6 @@ export function SupportPage(): React.JSX.Element {
             <a href={statusPageUrl} target="_blank" rel="noreferrer" className={cn(buttonVariants({ variant: 'secondary' }), 'inline-flex')}>
               Open public status page
             </a>
-            <Link to="/status" className={buttonVariants({ variant: 'outline' })}>
-              Heartbeat recommendations
-            </Link>
           </CardContent>
         </Card>
       </div>

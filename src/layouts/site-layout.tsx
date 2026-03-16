@@ -36,6 +36,14 @@ export function SiteLayout(): React.JSX.Element {
                 {route.label}
               </NavLink>
             ))}
+            <a
+              href="https://status.chronyapp.com"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-compact border border-line bg-row px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition-colors whitespace-nowrap hover:text-ink"
+            >
+              Status
+            </a>
           </nav>
         </div>
       </header>
