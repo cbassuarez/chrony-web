@@ -44,6 +44,10 @@ body {
   font-feature-settings: 'liga' 1, 'kern' 1;
 }
 
+.chrony-wordmark-adaptive {
+  mix-blend-mode: difference;
+}
+
 a {
   color: inherit;
 }

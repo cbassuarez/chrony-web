@@ -36,7 +36,7 @@ export function SiteLayout(): React.JSX.Element {
           <div className="flex flex-col gap-3 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center justify-between md:block">
               <NavLink to="/" className="text-[30px] font-semibold tracking-tight text-ink">
-                <Wordmark />
+                <Wordmark tone="adaptive" />
               </NavLink>
               <button
                 type="button"
@@ -123,7 +123,7 @@ export function SiteLayout(): React.JSX.Element {
         <div className="mx-auto grid max-w-6xl gap-6 px-6 py-10 md:grid-cols-2 md:items-end">
           <div>
             <p className="text-lg font-semibold">
-              <Wordmark />
+              <Wordmark tone="adaptive" />
             </p>
             <p className="mt-2 max-w-md text-xs leading-6 text-muted">
               One shared pad, always ready. Built by Stage Devices.
