@@ -75,6 +75,7 @@ export const appStoreBadgeImageUrl =
 export const macAppStoreBadgeImageUrl =
   'https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us?releaseDate=1766361600';
 export const statusPageUrl = 'https://status.chronyapp.com';
+export const appleStandardEulaUrl = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
 
 export const proPricingContent: ProPricingContent = {
   storefrontCurrencyCode: 'USD',
@@ -184,9 +185,8 @@ export const routeMetaList: RouteMeta[] = [
     label: 'Terms',
     path: '/terms',
     navPlacement: 'footer',
-    title: 'chrony Terms of Use | Stage Devices',
-    description:
-      'Terms of Use for chrony, including subscriptions, service availability, and account responsibilities.',
+    title: 'chrony Terms | Apple Standard EULA',
+    description: "chrony terms are provided by Apple's Standard Licensed Application End User License Agreement.",
     canonicalPath: '/terms',
   },
   {

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { appStoreUrl, deriveProPricingValues, proPricingContent } from '@/content/site';
+import { appStoreUrl, appleStandardEulaUrl, deriveProPricingValues, proPricingContent } from '@/content/site';
 import { appRouteObjects } from '@/router';
 
 function renderPath(path: string): void {
@@ -27,9 +27,13 @@ describe('Chrony route coverage', () => {
     expect(screen.getAllByText(/stage devices/i).length).toBeGreaterThan(0);
   });
 
-  it('renders terms route with legal heading', async () => {
+  it('renders terms route as an Apple EULA redirect page', async () => {
     renderPath('/terms');
-    expect(await screen.findByRole('heading', { name: /terms of use/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /redirecting to apple terms/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /open the apple standard eula/i })).toHaveAttribute(
+      'href',
+      appleStandardEulaUrl,
+    );
   });
 
   it('renders support route with support email', async () => {
